@@ -1,4 +1,5 @@
-﻿.git
+﻿# Struktura projektu
+.gitignore
 README.md
 /src
  ├── WpfApp.Wpf
