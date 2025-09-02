@@ -16,4 +16,8 @@
     <Folder Include="Helpers\Converters\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\WpfApp.Core\WpfApp.Core.csproj" />
+  </ItemGroup>
+
 </Project>

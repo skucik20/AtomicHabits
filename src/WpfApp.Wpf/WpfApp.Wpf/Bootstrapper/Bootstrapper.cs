@@ -1,12 +1,15 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-
+using Microsoft.EntityFrameworkCore;
+using WpfApp.Core.Data;
 using WpfApp.Wpf.ViewModels;
 using WpfApp.Wpf.Views;
+using System;
 
 namespace WpfApp.Wpf.Bootstrapper
 {
     public class Bootstrapper
     {
+        private static IServiceProvider _serviceProvider;
         public ServiceProvider ServiceProvider { get; private set; }
 
         public void Run()
@@ -22,6 +25,10 @@ namespace WpfApp.Wpf.Bootstrapper
 
         private void ConfigureServices(ServiceCollection services)
         {
+            // Konfiguracja bazy danych SQLite
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlite("Data Source=calculations.db"));
+
             // Business serwises
 
 
