@@ -22,13 +22,19 @@ namespace WpfApp.Wpf.Bootstrapper
 
         private void ConfigureServices(ServiceCollection services)
         {
-            // Serwisy biznesowe
+            // Business serwises
 
 
-            // ViewModele
+            // ViewModels
+            services.AddTransient<HomeViewModel>();
             services.AddTransient<MainVindowViewModel>();
 
-            // Okna
+            // Views
+            services.AddTransient<HomeView>(provider => new HomeView
+            {
+                DataContext = provider.GetRequiredService<HomeViewModel>()
+            });
+
             services.AddTransient<MainVindowView>(provider => new MainVindowView
             {
                 DataContext = provider.GetRequiredService<MainVindowViewModel>()

@@ -9,5 +9,10 @@ namespace WpfApp.Wpf.ViewModels
 {
     public class MainVindowViewModel : BaseViewModel
     {
+		public HomeViewModel HomeViewModel { get; }
+        public MainVindowViewModel(HomeViewModel homeViewModel)
+        {
+            HomeViewModel = homeViewModel;
+        }
     }
 }
