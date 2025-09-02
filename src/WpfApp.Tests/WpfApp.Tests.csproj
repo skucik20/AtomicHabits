@@ -25,4 +25,9 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CoreTests\" />
+    <Folder Include="WpfTests\" />
+  </ItemGroup>
+
 </Project>
