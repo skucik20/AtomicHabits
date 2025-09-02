@@ -4,6 +4,9 @@ using WpfApp.Core.Data;
 using WpfApp.Wpf.ViewModels;
 using WpfApp.Wpf.Views;
 using System;
+using WpfApp.Core.Interfaces;
+using WpfApp.Core.Services;
+using System.IO;
 
 namespace WpfApp.Wpf.Bootstrapper
 {
@@ -25,18 +28,26 @@ namespace WpfApp.Wpf.Bootstrapper
 
         private void ConfigureServices(ServiceCollection services)
         {
-            // Konfiguracja bazy danych SQLite
+            var dbPath = Path.Combine(AppContext.BaseDirectory, "app.db");
+            // SQLite database configuration
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlite("Data Source=calculations.db"));
+                options.UseSqlite($"Data Source={dbPath}"));
+
 
             // Business serwises
-
+            services.AddScoped<IAtomicHabitService, AtomicHabitService>();
 
             // ViewModels
             services.AddTransient<HomeViewModel>();
+            services.AddTransient<CreateAtomicHabitViewModel>();
             services.AddTransient<MainVindowViewModel>();
 
             // Views
+            services.AddTransient<CreateAtomicHabitView>(provider => new CreateAtomicHabitView
+            {
+                DataContext = provider.GetRequiredService<CreateAtomicHabitViewModel>()
+            });
+            
             services.AddTransient<HomeView>(provider => new HomeView
             {
                 DataContext = provider.GetRequiredService<HomeViewModel>()

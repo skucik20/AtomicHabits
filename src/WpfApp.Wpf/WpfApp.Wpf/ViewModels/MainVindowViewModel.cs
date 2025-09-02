@@ -10,9 +10,11 @@ namespace WpfApp.Wpf.ViewModels
     public class MainVindowViewModel : BaseViewModel
     {
 		public HomeViewModel HomeViewModel { get; }
-        public MainVindowViewModel(HomeViewModel homeViewModel)
+		public CreateAtomicHabitViewModel CreateAtomicHabitViewModel { get; }
+        public MainVindowViewModel(HomeViewModel homeViewModel, CreateAtomicHabitViewModel createAtomicHabitViewModel)
         {
             HomeViewModel = homeViewModel;
+            CreateAtomicHabitViewModel = createAtomicHabitViewModel;    
         }
     }
 }

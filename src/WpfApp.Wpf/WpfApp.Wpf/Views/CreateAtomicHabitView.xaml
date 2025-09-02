@@ -8,7 +8,13 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel>
-            <TextBlock Text="Title"/>
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Title"/>
+            <TextBox Text="{Binding HabitTitle, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Description"/>
+            <TextBox Text="{Binding HabitDescription, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="Add" Command="{Binding AddHabitCommand}"/>
         </StackPanel>
+
+        
     </Grid>
 </UserControl>

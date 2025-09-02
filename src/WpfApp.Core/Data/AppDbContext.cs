@@ -11,7 +11,7 @@ namespace WpfApp.Core.Data
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<AtomicHabitModel> AtomicHabitModel { get; set; }
+        public DbSet<AtomicHabitModel> AtomicHabits { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) 
         {

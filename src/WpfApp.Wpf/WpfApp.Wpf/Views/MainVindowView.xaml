@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:WpfApp.Wpf.Views"
         mc:Ignorable="d"
         Title="MainVindowView" Height="450" Width="800">
-    <Grid>
+    <StackPanel>
         <local:HomeView DataContext="{Binding HomeViewModel}"/>
+        <local:CreateAtomicHabitView DataContext="{Binding CreateAtomicHabitViewModel}"/>
 
-    </Grid>
+    </StackPanel>
 </Window>

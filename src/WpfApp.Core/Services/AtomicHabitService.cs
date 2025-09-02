@@ -1,0 +1,43 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WpfApp.Core.Data;
+using WpfApp.Core.Interfaces;
+using WpfApp.Core.Models;
+
+namespace WpfApp.Core.Services
+{
+    public class AtomicHabitService : IAtomicHabitService
+    {
+        private readonly AppDbContext _context;
+
+        public AtomicHabitService(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<List<AtomicHabitModel>> GetAllAsync()
+        {
+            return await _context.AtomicHabits.ToListAsync();
+        }
+
+        public async Task AddAsync(AtomicHabitModel person)
+        {
+            _context.AtomicHabits.Add(person);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var person = await _context.AtomicHabits.FindAsync(id);
+            if (person != null)
+            {
+                _context.AtomicHabits.Remove(person);
+                await _context.SaveChangesAsync();
+            }
+        }
+    }
+}
