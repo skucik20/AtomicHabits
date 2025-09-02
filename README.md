@@ -1,6 +1,4 @@
 ﻿# Struktura projektu
-.gitignore
-README.md
 /src
  ├── WpfApp.Wpf
  │   ├── ViewModels
