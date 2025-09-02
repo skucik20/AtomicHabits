@@ -1,0 +1,66 @@
+# Build Folders
+bin/
+obj/
+Debug/
+Release/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# Resharper
+_ReSharper*/
+
+# NuGet
+*.nupkg
+packages/
+*.snupkg
+
+# Build Results of an ATL Project
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.log
+*.vspscc
+*.vssscc
+
+# Visual Studio Code
+.vscode/
+
+# DotCover
+*.dotCover
+
+# Test Results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Rider
+.idea/
+
+# Others
+*.dbmdl
+*.bak
+*.backup
+*.orig
+*.cache
