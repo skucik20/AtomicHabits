@@ -5,7 +5,7 @@ using WpfApp.Core.Models.Shared;
 
 namespace WpfApp.Core.Models;
 
-public class AtomicHabitModel : BaseEntityModel, IMidnightAction
+public class AtomicHabitModel : BaseEntityModel
 {
     private bool _isHabitDone;
     private int _streak;
@@ -24,15 +24,4 @@ public class AtomicHabitModel : BaseEntityModel, IMidnightAction
         get => _streak;
         set { _streak = value; OnPropertyChanged(nameof(Streak)); }
     }
-
-    public void OnMidnight()
-    {
-        if(IsHabitDone == true)
-        {
-            Streak++;
-        }
-        IsHabitDone = false;
-    }
-
-
 }

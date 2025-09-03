@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace WpfApp.Core.Interfaces
 {
-    public interface IMidnightAction
+    public interface IDailyResetService
     {
-        void OnMidnight();
+        void Start();
     }
 }
