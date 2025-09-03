@@ -19,6 +19,7 @@ namespace WpfApp.Wpf.ViewModels
     public class HomeViewModel : BaseViewModel
     {
         private readonly IAtomicHabitService _atomicHabitService;
+        private readonly IProgressHistoryService _progressHistoryService;
         public ICommand CreateAtomicHabitCommand { get; set; }
         private ObservableCollection<AtomicHabitModel> _atimicHabitsCollection;
 
@@ -37,12 +38,16 @@ namespace WpfApp.Wpf.ViewModels
             set { _atimicHabitsCollection = value; }
         }
 
-        public HomeViewModel(IAtomicHabitService atomicHabitService)
+        public HomeViewModel(IAtomicHabitService atomicHabitService, IProgressHistoryService progressHistoryService)
         {
             AtimicHabitsCollection = new ObservableCollection<AtomicHabitModel>();
+            
             _atomicHabitService = atomicHabitService;
-            _ = LoadData();
+            _progressHistoryService = progressHistoryService;
+            
             CreateAtomicHabitCommand = new RelayCommand(CreateAtomicHabit);
+
+            _ = LoadData();   
         }
 
         private void CreateAtomicHabit(object parameter)
@@ -57,17 +62,20 @@ namespace WpfApp.Wpf.ViewModels
             AtimicHabitsCollection.Clear();
             foreach (var p in atomicHabits)
             {
-                p.PropertyChanged += Person_PropertyChanged;
+                p.PropertyChanged += AtomicHabit_PropertyChanged;
                 AtimicHabitsCollection.Add(p);
             }
                 
         }
 
-        private async void Person_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private async void AtomicHabit_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(AtomicHabitModel.IsHabitDone))
             {
                 var atomicHabit = (AtomicHabitModel)sender;
+
+                await _progressHistoryService.AddProgressAsync(atomicHabit);
+
                 await _atomicHabitService.UpdateAsync(atomicHabit);
             }
         }

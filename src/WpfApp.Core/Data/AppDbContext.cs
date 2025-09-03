@@ -13,6 +13,7 @@ namespace WpfApp.Core.Data
     public class AppDbContext : DbContext
     {
         public DbSet<AtomicHabitModel> AtomicHabits { get; set; }
+        public DbSet<ProgressHistoryModel> ProgressHistory { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) 
         {
@@ -21,6 +22,7 @@ namespace WpfApp.Core.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AtomicHabitModel>().ToTable("AtomicHabits");
+            modelBuilder.Entity<ProgressHistoryModel>().ToTable("ProgressHistory");
         }
     }
 

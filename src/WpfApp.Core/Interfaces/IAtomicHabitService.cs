@@ -10,8 +10,8 @@ namespace WpfApp.Core.Interfaces
     public interface IAtomicHabitService
     {
         Task<List<AtomicHabitModel>> GetAllAsync();
-        Task AddAsync(AtomicHabitModel person);
-        Task UpdateAsync(AtomicHabitModel person);
+        Task AddAsync(AtomicHabitModel atomicHabit);
+        Task UpdateAsync(AtomicHabitModel atomicHabit);
         Task DeleteAsync(int id);
     }
 }

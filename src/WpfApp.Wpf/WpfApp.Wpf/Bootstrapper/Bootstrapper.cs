@@ -43,6 +43,7 @@ namespace WpfApp.Wpf.Bootstrapper
             // Business serwises
             services.AddScoped<IAtomicHabitService, AtomicHabitService>();
             services.AddSingleton<IDailyResetService, DailyResetService>();
+            services.AddSingleton<IProgressHistoryService, ProgressHistoryService>();
 
             // ViewModels
             services.AddTransient<HomeViewModel>();

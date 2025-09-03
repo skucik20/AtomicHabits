@@ -37,10 +37,10 @@ namespace WpfApp.Core.Services
 
         public async Task DeleteAsync(int id)
         {
-            var person = await _context.AtomicHabits.FindAsync(id);
-            if (person != null)
+            var atomicHabit = await _context.AtomicHabits.FindAsync(id);
+            if (atomicHabit != null)
             {
-                _context.AtomicHabits.Remove(person);
+                _context.AtomicHabits.Remove(atomicHabit);
                 await _context.SaveChangesAsync();
             }
         }

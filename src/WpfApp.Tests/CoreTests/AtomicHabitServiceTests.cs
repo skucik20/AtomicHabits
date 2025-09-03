@@ -16,7 +16,7 @@ namespace WpfApp.Tests.CoreTests
         /// I’m testing the AddAsync method in AtomicHabitService using an in-memory database.
         /// </summary>
         [Fact]
-        public async Task AddAsync_ShouldAddPerson()
+        public async Task AddAsync_ShouldAddAtomicHabit()
         {
             var options = new DbContextOptionsBuilder<AppDbContext>()
                 .UseInMemoryDatabase("TestDb")

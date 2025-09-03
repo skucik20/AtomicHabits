@@ -10,8 +10,6 @@ public class AtomicHabitModel : BaseEntityModel
     private bool _isHabitDone;
     private int _streak;
 
-
-
     public string Title { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public bool IsHabitDone
@@ -24,4 +22,8 @@ public class AtomicHabitModel : BaseEntityModel
         get => _streak;
         set { _streak = value; OnPropertyChanged(nameof(Streak)); }
     }
+
+    // Kolekcja historii nawyku
+    public ICollection<ProgressHistoryModel> ProgressHistories { get; set; } = new List<ProgressHistoryModel>();
+
 }
