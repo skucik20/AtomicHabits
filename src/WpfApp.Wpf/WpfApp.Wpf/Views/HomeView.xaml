@@ -15,16 +15,29 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <TextBlock Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"/>
 
-                        <TextBlock Grid.Row="1" Text="Descritption"/>
-                        <TextBox Grid.Row="1" 
+
+                        <TextBlock Grid.Row="1" Text="Opis"/>
+
+                        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1" CornerRadius="5" Padding="5">
+                            <TextBlock TextWrapping="Wrap" Width="200"
                                  Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Border>
+
+                        <TextBlock Text="Status" Grid.Column="1"/>
+                        <CheckBox  IsChecked="{Binding IsHabitDone, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="Streak" Grid.Column="2"/>
+                        <TextBlock Text="int" Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        
+
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

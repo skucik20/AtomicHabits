@@ -11,6 +11,7 @@ namespace WpfApp.Core.Interfaces
     {
         Task<List<AtomicHabitModel>> GetAllAsync();
         Task AddAsync(AtomicHabitModel person);
+        Task UpdateAsync(AtomicHabitModel person);
         Task DeleteAsync(int id);
     }
 }

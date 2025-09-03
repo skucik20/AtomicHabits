@@ -29,6 +29,11 @@ namespace WpfApp.Core.Services
             _context.AtomicHabits.Add(atomicHabit);
             await _context.SaveChangesAsync();
         }
+        public async Task UpdateAsync(AtomicHabitModel atomicHabit)
+        {
+            _context.AtomicHabits.Update(atomicHabit);
+            await _context.SaveChangesAsync();
+        }
 
         public async Task DeleteAsync(int id)
         {

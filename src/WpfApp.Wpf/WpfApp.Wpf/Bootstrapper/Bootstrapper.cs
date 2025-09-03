@@ -8,6 +8,7 @@ using WpfApp.Core.Interfaces;
 using WpfApp.Core.Services;
 using System.IO;
 using WpfApp.Core.Constans;
+using WpfApp.Wpf.Helpers;
 
 namespace WpfApp.Wpf.Bootstrapper
 {
