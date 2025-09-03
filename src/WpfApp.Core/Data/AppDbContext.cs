@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp.Core.Constans;
 using WpfApp.Core.Models;
 
 namespace WpfApp.Core.Data
@@ -30,7 +31,7 @@ namespace WpfApp.Core.Data
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
 
             // connection string taka sama jak w Bootstrapper.cs
-            optionsBuilder.UseSqlite("Data Source=app.db");
+            optionsBuilder.UseSqlite($"Data Source={DbConnectionString.connectionString}");
 
             return new AppDbContext(optionsBuilder.Options);
         }

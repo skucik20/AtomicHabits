@@ -40,7 +40,7 @@ namespace WpfApp.Wpf.ViewModels
 
         public async Task AddHabit(object parametr)
         {
-            await _atomicHabitService.AddAsync(new AtomicHabitModel { Title = HabitDescription, Description = HabitDescription });
+            await _atomicHabitService.AddAsync(new AtomicHabitModel { Title = HabitTitle, Description = HabitDescription });
         }
 
     }

@@ -6,8 +6,30 @@
              xmlns:local="clr-namespace:WpfApp.Wpf.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <StackPanel>
+        <TextBlock Text="Witaj! oto lista twoich Atomi Habitów"/>
+        <ListView ItemsSource="{Binding AtimicHabitsCollection}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <TextBlock Grid.Row="1" Text="Descritption"/>
+                        <TextBox Grid.Row="1" 
+                                 Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ListView>
         <Button Content="Create new habbit" Command="{Binding CreateAtomicHabitCommand}"/>
 
-    </Grid>
+    </StackPanel>
 </UserControl>

@@ -7,6 +7,7 @@ using System;
 using WpfApp.Core.Interfaces;
 using WpfApp.Core.Services;
 using System.IO;
+using WpfApp.Core.Constans;
 
 namespace WpfApp.Wpf.Bootstrapper
 {
@@ -28,7 +29,8 @@ namespace WpfApp.Wpf.Bootstrapper
 
         private void ConfigureServices(ServiceCollection services)
         {
-            var dbPath = Path.Combine(AppContext.BaseDirectory, "app.db");
+            //var dbPath = Path.Combine(AppContext.BaseDirectory, "app.db");
+            var dbPath = DbConnectionString.connectionString;
             // SQLite database configuration
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite($"Data Source={dbPath}"));

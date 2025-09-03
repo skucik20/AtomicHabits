@@ -24,9 +24,9 @@ namespace WpfApp.Core.Services
             return await _context.AtomicHabits.ToListAsync();
         }
 
-        public async Task AddAsync(AtomicHabitModel person)
+        public async Task AddAsync(AtomicHabitModel atomicHabit)
         {
-            _context.AtomicHabits.Add(person);
+            _context.AtomicHabits.Add(atomicHabit);
             await _context.SaveChangesAsync();
         }
 
