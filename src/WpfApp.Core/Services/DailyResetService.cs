@@ -15,13 +15,14 @@ namespace WpfApp.Core.Services
         private readonly AppDbContext _context;
         private readonly System.Timers.Timer _timer;
         private readonly IAtomicHabitService _atomicHabitService;
+        public bool IsTimerEnabled => _timer.Enabled;
+
         public DailyResetService(AppDbContext context, IAtomicHabitService atomicHabitService)
         {
             _context = context;
             _atomicHabitService = atomicHabitService;
             _timer = new System.Timers.Timer();
-            // TODO zmienić na sprawdzanie co minutę
-            _timer.Interval = 1000; //* 60; // sprawdzanie co minutę
+            _timer.Interval = 1000 * 60; // sprawdzanie co minutę
             _timer.Elapsed += Timer_Elapsed;
         }
 
@@ -30,41 +31,30 @@ namespace WpfApp.Core.Services
             _timer.Start();
         }
 
-        private async void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        //private async void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        //{
+        //    var now = DateTime.Now;
+        //    if (now.Hour == 0 && now.Minute == 0)
+        //    {
+        //        await _atomicHabitService.ResetValues();
+        //    }
+        //}
+
+        protected virtual async Task OnTimerElapsed(DateTime now)
         {
-            var now = DateTime.Now;
             if (now.Hour == 0 && now.Minute == 0)
             {
-                await ResetValues();
+                await _atomicHabitService.ResetValues();
             }
         }
 
-        private async Task ResetValues()
+        private async void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            
-            var atomicHabits = await _atomicHabitService.GetAllAsync();
-
-            foreach (var habit in atomicHabits)
-            {
-                StreakSupport(habit);
-                habit.IsHabitDone = false; // must be after StreakFlag
-
-                //_context.AtomicHabits.Update(habit);
-            }
-            await _context.SaveChangesAsync();
+            await OnTimerElapsed(DateTime.Now);
         }
 
-        private void StreakSupport(AtomicHabitModel habit)
-        {
-            switch (habit.IsHabitDone)
-            {
-                case false:
-                    habit.Streak = 0;
-                    break;
-                case true:
-                    habit.Streak++;
-                    break;
-            }
-        }
+
+
+
     }
 }

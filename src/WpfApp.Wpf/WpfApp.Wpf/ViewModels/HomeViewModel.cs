@@ -47,6 +47,7 @@ namespace WpfApp.Wpf.ViewModels
             
             CreateAtomicHabitCommand = new RelayCommand(CreateAtomicHabit);
 
+            _ = _atomicHabitService.HasTodayAtomicHabitChecked();
             _ = LoadData();   
         }
 

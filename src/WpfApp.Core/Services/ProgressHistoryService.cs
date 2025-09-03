@@ -16,6 +16,15 @@ namespace WpfApp.Core.Services
             _context = context;
         }
 
+        public async Task<bool> HasProgressTodayAsync(int atomicHabitId)
+        {
+            var today = DateTime.Now.Date;
+
+            return await _context.ProgressHistory
+                                 .AnyAsync(p => p.AtomicHabitId == atomicHabitId &&
+                                                p.HabitCheckDateTime.Date == today);
+        }
+
         public async Task<ProgressHistoryModel> AddProgressAsync(AtomicHabitModel atomicHabit)
         {
             if (atomicHabit == null)

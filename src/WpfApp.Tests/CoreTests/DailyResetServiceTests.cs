@@ -14,81 +14,84 @@ namespace WpfApp.Tests.CoreTests
 {
     public class DailyResetServiceTests
     {
-        private DailyResetService CreateService(List<AtomicHabitModel> habits, out Mock<IAtomicHabitService> atomicHabitServiceMock)
+        private readonly Mock<IAtomicHabitService> _habitServiceMock;
+
+        public DailyResetServiceTests()
         {
-            // Mock DbContext
-            var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase(databaseName: "TestDb")
-                .Options;
-
-            var context = new AppDbContext(options);
-
-            // Mock IAtomicHabitService
-            atomicHabitServiceMock = new Mock<IAtomicHabitService>();
-            atomicHabitServiceMock.Setup(s => s.GetAllAsync())
-                .ReturnsAsync(habits);
-
-            return new DailyResetService(context, atomicHabitServiceMock.Object);
+            _habitServiceMock = new Mock<IAtomicHabitService>();
         }
-
+        /// <summary>
+        /// Sprawdza, czy metoda ResetValues() jest wywoływana dokładnie raz,
+        /// gdy zegar wskaże północ (00:00).
+        /// </summary>
         [Fact]
-        public async Task ResetValues_ShouldIncrementStreak_WhenHabitIsDone()
+        public async Task OnTimerElapsed_AtMidnight_CallsResetValues()
         {
             // Arrange
-            var habits = new List<AtomicHabitModel>
-            {
-                new AtomicHabitModel { Id = 1, IsHabitDone = true, Streak = 2 },
-                new AtomicHabitModel { Id = 2, IsHabitDone = false, Streak = 3 }
-            };
-
-            var service = CreateService(habits, out var mockService);
+            var service = new TestableDailyResetService(_habitServiceMock.Object);
+            var midnight = new DateTime(2024, 1, 1, 0, 0, 0);
 
             // Act
-            // używamy refleksji do wywołania prywatnej metody
-            var method = typeof(DailyResetService).GetMethod("ResetValues", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            var task = (Task)method.Invoke(service, null);
-            await task;
+            await service.TestOnTimerElapsed(midnight);
 
             // Assert
-            Assert.Equal(3, habits[0].Streak); // streak powinien wzrosnąć
-            Assert.False(habits[0].IsHabitDone); // habit powinien zostać zresetowany
+            _habitServiceMock.Verify(s => s.ResetValues(), Times.Once);
         }
 
+        /// <summary>
+        /// Sprawdza, że metoda ResetValues() NIE jest wywoływana,
+        /// jeśli aktualny czas nie jest północą.
+        /// </summary>
         [Fact]
-        public async Task ResetValues_ShouldResetStreak_WhenHabitIsNotDone()
+        public async Task OnTimerElapsed_NotAtMidnight_DoesNotCallResetValues()
         {
             // Arrange
-            var habits = new List<AtomicHabitModel>
-        {
-            new AtomicHabitModel { Id = 1, IsHabitDone = false, Streak = 5 }
-        };
-            var service = CreateService(habits, out var mockService);
+            var service = new TestableDailyResetService(_habitServiceMock.Object);
+            var notMidnight = new DateTime(2024, 1, 1, 10, 30, 0);
 
             // Act
-            var method = typeof(DailyResetService).GetMethod("ResetValues", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            var task = (Task)method.Invoke(service, null);
-            await task;
+            await service.TestOnTimerElapsed(notMidnight);
 
             // Assert
-            Assert.Equal(0, habits[0].Streak); // streak powinien zostać wyzerowany
-            Assert.False(habits[0].IsHabitDone); // habit powinien zostać zresetowany
+            _habitServiceMock.Verify(s => s.ResetValues(), Times.Never);
         }
 
+        /// <summary>
+        /// Sprawdza, że wywołanie Start() włącza wewnętrzny timer,
+        /// dzięki czemu serwis rozpoczyna okresowe sprawdzanie czasu.
+        /// </summary>
         [Fact]
-        public void Timer_ShouldCallResetAtMidnight()
+        public void Start_ShouldEnableTimer()
         {
-            // Tutaj testowanie timera jest trudne w unit testach bez Dependency Injection Timera
-            // Możemy sprawdzić jedynie, że Timer został ustawiony
-            var mockService = new Mock<IAtomicHabitService>();
-            var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase("TimerTestDb").Options;
-            var context = new AppDbContext(options);
+            // Arrange
+            var service = new DailyResetService(null, _habitServiceMock.Object);
 
-            var service = new DailyResetService(context, mockService.Object);
+            // Act
             service.Start();
 
-            // Timer powinien być aktywny
-            Assert.True(service != null); // minimalny sanity check
+            // Assert
+            Assert.True(service.IsTimerEnabled);
+        }
+
+        /// <summary>
+        /// Klasa testowa rozszerzająca DailyResetService,
+        /// która pozwala wywoływać logikę OnTimerElapsed ręcznie
+        /// z podaną datą i godziną, co upraszcza testowanie.
+        /// </summary>
+        private class TestableDailyResetService : DailyResetService
+        {
+            private readonly IAtomicHabitService _atomicHabitService;
+
+            public TestableDailyResetService(IAtomicHabitService habitService)
+                : base(null, habitService)
+            {
+                _atomicHabitService = habitService;
+            }
+
+            public Task TestOnTimerElapsed(DateTime now)
+            {
+                return OnTimerElapsed(now);
+            }
         }
     }
 }

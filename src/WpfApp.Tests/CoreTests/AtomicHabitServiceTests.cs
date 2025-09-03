@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp.Core.Data;
+using WpfApp.Core.Interfaces;
 using WpfApp.Core.Models;
 using WpfApp.Core.Services;
 
@@ -23,7 +25,8 @@ namespace WpfApp.Tests.CoreTests
                 .Options;
 
             using var context = new AppDbContext(options);
-            var service = new AtomicHabitService(context);
+            var mockProgressHistoryService = new Mock<IProgressHistoryService>();
+            var service = new AtomicHabitService(context, mockProgressHistoryService.Object);
 
             await service.AddAsync(new AtomicHabitModel { Id = 1, Title = "Test title", Description = "Test desc" });
 

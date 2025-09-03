@@ -13,5 +13,7 @@ namespace WpfApp.Core.Interfaces
         Task AddAsync(AtomicHabitModel atomicHabit);
         Task UpdateAsync(AtomicHabitModel atomicHabit);
         Task DeleteAsync(int id);
+        Task ResetValues();
+        Task HasTodayAtomicHabitChecked();
     }
 }
