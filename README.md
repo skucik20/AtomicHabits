@@ -23,6 +23,7 @@ A WPF project following the MVVM architecture, with separation of application la
 
 ## Instalation
 
+```bash
 git clone https://github.com/skucik20/AtomicHabits.git
 cd src
 dotnet build
@@ -31,6 +32,7 @@ dotnet run --project WpfApp.Wpf
 
 ## Project structure
 
+```bash
 /src
  ├── WpfApp.Wpf
  │   ├── Bootstrapper
