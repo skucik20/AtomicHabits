@@ -64,6 +64,7 @@ dotnet run --project WpfApp.Wpf
  │   │    └── PersonServiceTests.cs
  │   ├── WpfTests
  │   │    └── MainViewModelTests.cs
+```
 
 ### Folder Structure
 
@@ -79,3 +80,4 @@ To add a new migration and update the database, follow these steps:
 cd WpfApp.Core
 dotnet ef migrations add <MigrationName>
 dotnet ef database update
+```
