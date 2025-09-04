@@ -43,27 +43,43 @@ dotnet run --project WpfApp.Wpf
  │   │    └── MainWindow.xaml
  │   ├── Helpers
  │   │    ├── Commands
- │   │		   └── RelayCommand.cs
+ │   │		   └── RelayCommand.cs  # Implementacja ICommand dla MVVM
  │   │    ├── Converters
  │   │		   └── 
  │   ├── App.xaml
  │   └── App.xaml.cs
  ├── WpfApp.Core
+ │   ├── Constans
+ │   │    └── DbConnectionString.cs
  │   ├── Data
  │   │    └── AppDbContext.cs
- │   ├── Services
- │   │    └── PersonService.cs
+ │   ├── Interfaces
+ │   │    └── IAtomicHabitService.cs
+ │   │    └── IDailyResetService.cs
+ │   │    └── IProgressHistoryService.cs
+ │   ├── Migrations
+ │   │    └── FirstMigration.cs
+ │   │    └── SecondMigration.cs
+ │   │    └── ...
  │   ├── Models
- │   │    └── Person.cs
+ │   │    ├── Shared
+ │   │    │    └── BaseEntityModel.cs
+ │   │    │    └── BaseModel.cs
+ │   │    └── AtomicHabitModel.cs
+ │   │    └── ProgressHistoryModel.cs
+ │   ├── Services
+ │   │    └── AtomicHabitService.cs
+ │   │    └── DailyResetService.cs
+ │   │    └── ProgressHistoryService.cs
  │   ├── Enums
- │   │    └── ePeople.cs
- │   ├── Constants
- │   │    └── Const1.cs
+ │   │    └── 
  ├── WpfApp.Tests
  │   ├── CoreTests
- │   │    └── PersonServiceTests.cs
+ │   │    └── AtomicHabitServiceTests.cs
+ │   │    └── DailyResetServiceTests.cs
+ │   │    └── ProgressHistoryServiceTests.cs
  │   ├── WpfTests
- │   │    └── MainViewModelTests.cs
+ │   │    └── HomeViewModelTests.cs
 ```
 
 ### Folder Structure
