@@ -111,7 +111,7 @@ dotnet ef database update
 
     
 ## Completed ✅ 
-- [✅] Create GitHub repository
+- [x Create GitHub repository
 - [✅] Set up project skeleton
 - [✅] Table in db based on the AtomicHabitModel
 - [✅] Table in db based on the ProgressHistoryModel
