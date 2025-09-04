@@ -18,20 +18,34 @@ namespace WpfApp.Wpf.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
+        private string _habitTitle = string.Empty;
+        private string _habitDescription = string.Empty;
+        private bool _isHabitChecked;
+        public ICommand AddHabitCommand { get; set; }
+
         private readonly IAtomicHabitService _atomicHabitService;
         private readonly IProgressHistoryService _progressHistoryService;
-        public ICommand CreateAtomicHabitCommand { get; set; }
+
         private ObservableCollection<AtomicHabitModel> _atimicHabitsCollection;
 
-        private bool _isHabitChecked;
+        #region Properties
+        public string HabitTitle
+        {
+            get { return _habitTitle; }
+            set { _habitTitle = value; }
+        }
 
+        public string HabitDescription
+        {
+            get { return _habitDescription; }
+            set { _habitDescription = value; }
+        }
         public bool IsHabitChecked
         {
             get { return _isHabitChecked; }
             set { _isHabitChecked = value; OnPropertyChanged(nameof(IsHabitChecked)); }
         }
-
-
+        #endregion
         public ObservableCollection<AtomicHabitModel> AtimicHabitsCollection
         {
             get { return _atimicHabitsCollection; }
@@ -44,15 +58,16 @@ namespace WpfApp.Wpf.ViewModels
             
             _atomicHabitService = atomicHabitService;
             _progressHistoryService = progressHistoryService;
-            
-            CreateAtomicHabitCommand = new RelayCommand(CreateAtomicHabit);
+
+            AddHabitCommand = new RelayCommandAsync(AddHabit);
 
             _ = _atomicHabitService.HasTodayAtomicHabitChecked();
             _ = LoadData();   
         }
 
-        private void CreateAtomicHabit(object parameter)
+        public async Task AddHabit(object parametr)
         {
+            await _atomicHabitService.AddAsync(new AtomicHabitModel { Title = HabitTitle, Description = HabitDescription });
             _ = LoadData();
         }
 

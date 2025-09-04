@@ -47,13 +47,11 @@ namespace WpfApp.Wpf.ViewModels
         public ICommand HamburgerMenuSelectionChangedCommand { get; set; }
 
         public HomeViewModel _homeViewModel { get; set; }
-		public CreateAtomicHabitViewModel _createAtomicHabitViewModel { get; }
 		public ProgressHistoryViewModel _progressHistoryViewModel { get; }
-        public MainVindowViewModel(HomeViewModel homeViewModel, CreateAtomicHabitViewModel createAtomicHabitViewModel, ProgressHistoryViewModel progressHistoryViewModel)
+        public MainVindowViewModel(HomeViewModel homeViewModel, ProgressHistoryViewModel progressHistoryViewModel)
         {
 
             _homeViewModel = homeViewModel;
-            _createAtomicHabitViewModel = createAtomicHabitViewModel;
             _progressHistoryViewModel = progressHistoryViewModel;
 
             HamburgerMenuSelectionChangedCommand = new RelayCommand(HamburgerMenuSelectionChanged);

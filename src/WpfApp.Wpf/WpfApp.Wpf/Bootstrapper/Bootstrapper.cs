@@ -47,7 +47,6 @@ namespace WpfApp.Wpf.Bootstrapper
 
             // ViewModels
             services.AddTransient<HomeViewModel>();
-            services.AddTransient<CreateAtomicHabitViewModel>();
             services.AddTransient<MainVindowViewModel>();
             services.AddTransient<ProgressHistoryViewModel>();
 
@@ -55,10 +54,6 @@ namespace WpfApp.Wpf.Bootstrapper
             services.AddTransient<ProgressHistoryView>(provider => new ProgressHistoryView
             {
                 DataContext = provider.GetRequiredService<ProgressHistoryViewModel>()
-            });
-            services.AddTransient<CreateAtomicHabitView>(provider => new CreateAtomicHabitView
-            {
-                DataContext = provider.GetRequiredService<CreateAtomicHabitViewModel>()
             });
             
             services.AddTransient<HomeView>(provider => new HomeView
