@@ -5,8 +5,9 @@ A WPF project following the MVVM architecture, with separation of application la
 
 ## Features
 
-- Create custom habits with descriptions
-- Mark completed habits daily
+- Create custom habits with descriptions ✅
+- Mark completed habits daily ✅
+- Autamoatic streak update ✅
 - Track progress through charts and statistics (TODO)
 - Habit reminders (push/desktop) (TODO)
 - Filter habits by category or priority (TODO)
@@ -124,6 +125,7 @@ dotnet ef database update
 - [x] UI structure (hamburger menu serup)
 - [x] Deleting habits 
 - [x] Editing tasks
+
 ### Tests
 - [x] Write unit tests for AtomicHabitServiceTests
 - [x] Write unit tests for DailyResetServiceTests
