@@ -106,20 +106,22 @@ dotnet ef database update
     - [ ] Moving habits
     - [ ] Editing tasks
     - [ ] Filtering the list
+- [ ] Logic for ProgresHistory -> some charts etc
+- [ ] Notyfications
 
 ## Todo ⏳
-
+- [ ] UI structure
     
 ## Completed ✅ 
-- [x Create GitHub repository
-- [✅] Set up project skeleton
-- [✅] Table in db based on the AtomicHabitModel
-- [✅] Table in db based on the ProgressHistoryModel
-- [✅] Add new habit to list and database
-- [✅] Communication with the database and habitsList (checkBox update db)
-- [✅] Logic for marking habits - when should be chcked and unchecked (on startapp and at midnight)
-- [✅] Streak logic - when increment and reset (on startapp and at midnight)
+- [x] Create GitHub repository
+- [x] Set up project skeleton
+- [x] Table in db based on the AtomicHabitModel
+- [x] Table in db based on the ProgressHistoryModel
+- [x] Add new habit to list and database
+- [x] Communication with the database and habitsList (checkBox update db)
+- [x] Logic for marking habits - when should be chcked and unchecked (on startapp and at midnight)
+- [x] Streak logic - when increment and reset (on startapp and at midnight)
 ### Tests
-- [x Write unit tests for AtomicHabitServiceTests
+- [x] Write unit tests for AtomicHabitServiceTests
 - [x] Write unit tests for DailyResetServiceTests
-- [ ] Write unit tests for ProgressHistoryServiceTests
+- [x] Write unit tests for ProgressHistoryServiceTests
