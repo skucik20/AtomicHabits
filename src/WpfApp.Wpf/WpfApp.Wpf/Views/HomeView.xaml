@@ -9,85 +9,121 @@
              mc:Ignorable="d" 
              xmlns:ui="http://schemas.modernwpf.com/2019"
              d:DesignHeight="450" d:DesignWidth="800">
-    <ui:ScrollViewerEx>
-
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <ui:ThemeShadowChrome Depth="5">
-                <TextBlock Text="Witaj! oto lista twoich Atomi Habitów" Background="White"/>
-            </ui:ThemeShadowChrome>
-            
-            <ListView x:Name="HabitsListView" ItemsSource="{Binding AtimicHabitsCollection}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Margin="5">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="200" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <!--IsReadOnlyCaretVisible="False" Focusable="False"-->
-                            <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding IsTextBlockReadOnly, UpdateSourceTrigger=PropertyChanged}"
-                                     />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="Witaj! oto lista twoich Atomi Habitów"
+           FontFamily="Segoe UI Semibold"
+           FontSize="24"
+           FontWeight="Bold"
+           TextWrapping="Wrap"
+           TextAlignment="Center"
+           Foreground="White">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="Black" BlurRadius="5" ShadowDepth="2" Opacity="0.5"/>
+                    </TextBlock.Effect>
+                    
 
 
-                      
-                            <Expander Grid.Row="2" Header="Details">
-                                <Border  BorderBrush="Black" BorderThickness="1" CornerRadius="5" Padding="5">
-                                    <TextBox TextWrapping="Wrap" BorderThickness="0"
-                                           Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
-                                           IsReadOnly="{Binding IsTextBlockReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
-                                </Border>
-                            </Expander>
+                    <TextBlock.Padding>10</TextBlock.Padding>
+                </TextBlock>
 
-
-                            <TextBlock Text="Status" Grid.Column="1"/>
-                            <CheckBox  IsChecked="{Binding IsHabitDone, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <TextBlock Text="Streak" Grid.Column="2"/>
-                            <TextBlock Text="{Binding Streak, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                            <ui:CommandBar Height="40"
-                                       Grid.Column="3" Grid.RowSpan="3"
-                                       VerticalAlignment="Center">
-
-                                <ui:AppBarButton Icon="Delete" Label="Delete" 
-                                                 Command="{Binding DataContext.HabitDelateCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
-                                                 CommandParameter="{Binding}"/>
-                                
-           
-
-
-                                <ui:AppBarToggleButton Icon="Edit" Label="Edit"
-                                                       IsChecked="{Binding IsEditHabitModeOn,UpdateSourceTrigger=PropertyChanged}"
-                                                       Command="{Binding DataContext.HabitEditCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
-                                                       CommandParameter="{Binding}"/>
-
-
-
-                            </ui:CommandBar>
+                <Expander Header="Create new habbit" Grid.Row="2" Grid.Column="1" Margin="20" Width="300">
+                    <StackPanel>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Title"/>
+                        <TextBox Text="{Binding HabitTitle, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Description"/>
+                        <TextBox Text="{Binding HabitDescription, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Height="100" AllowDrop="True"/>
+                        <Grid>
+                            <Button Content="Add" Command="{Binding AddHabitCommand}"/>
+                            <Button Content="Clear" Command="{Binding ClearHabitCommand}" HorizontalAlignment="Right"/>
                         </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ListView>
-            <Expander Header="Create new habbit">
-                <StackPanel>
-                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Title"/>
-                    <TextBox Text="{Binding HabitTitle, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Description"/>
-                    <TextBox Text="{Binding HabitDescription, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Button Content="Add" Command="{Binding AddHabitCommand}"/>
-                </StackPanel>
-            </Expander>
+                        
+                    </StackPanel>
+                </Expander>
+
+                <ListView x:Name="HabitsListView" ItemsSource="{Binding AtimicHabitsCollection}" Grid.Column="1" Grid.Row="3" Focusable="False">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="1" CornerRadius="2" BorderBrush="White" Margin="0 5">
+                                <Grid Margin="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" IsReadOnly="{Binding IsTextBlockReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
 
 
+                                    <Expander Grid.Row="1" Header="Details">
+                                        <Border  BorderBrush="Black" BorderThickness="1" CornerRadius="5" Padding="5">
+                                            <TextBox TextWrapping="Wrap" BorderThickness="0"
+                               Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
+                               IsReadOnly="{Binding IsTextBlockReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Border>
+                                    </Expander>
+
+
+                                    <TextBlock Text="Status" Grid.Column="1"/>
+                                    <CheckBox  Grid.Row="1" Grid.Column="1"
+                                               IsChecked="{Binding IsHabitDone, UpdateSourceTrigger=PropertyChanged}"/>
+                                    
+                                    <TextBlock Text="Streak" Grid.Column="2"/>
+                                    <TextBlock Text="{Binding Streak, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"/>
+
+                                    <ui:CommandBar Height="40"
+                           Grid.Column="3" Grid.RowSpan="3"
+                           VerticalAlignment="Center">
+
+                                        <ui:AppBarButton Icon="Delete" Label="Delete" 
+                                     Command="{Binding DataContext.HabitDelateCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                     CommandParameter="{Binding}"/>
+
+
+
+
+                                        <ui:AppBarToggleButton Icon="Edit" Label="Edit"
+                                           IsChecked="{Binding IsEditHabitModeOn,UpdateSourceTrigger=PropertyChanged}"
+                                           Command="{Binding DataContext.HabitEditCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                           CommandParameter="{Binding}"/>
+
+
+
+                                    </ui:CommandBar>
+                                </Grid>
+
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ListView>
+                
+ 
+
+
+
+
+
+            </Grid>
 
         </StackPanel>
-    </ui:ScrollViewerEx>
+    </ScrollViewer>
     
 </UserControl>

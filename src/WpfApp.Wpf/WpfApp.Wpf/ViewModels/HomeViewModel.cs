@@ -25,6 +25,7 @@ namespace WpfApp.Wpf.ViewModels
         private string _habitDescription = string.Empty;
         private bool _isHabitChecked;
         public ICommand AddHabitCommand { get; set; }
+        public ICommand ClearHabitCommand { get; set; }
         public ICommand HabitDelateCommand { get; }
         public ICommand HabitEditCommand { get; set; }
 
@@ -38,13 +39,13 @@ namespace WpfApp.Wpf.ViewModels
         public string HabitTitle
         {
             get { return _habitTitle; }
-            set { _habitTitle = value; }
+            set { _habitTitle = value; OnPropertyChanged(nameof(HabitTitle)); }
         }
 
         public string HabitDescription
         {
             get { return _habitDescription; }
-            set { _habitDescription = value; }
+            set { _habitDescription = value; OnPropertyChanged(nameof(HabitDescription)); }
         }
         public bool IsHabitChecked
         {
@@ -66,6 +67,7 @@ namespace WpfApp.Wpf.ViewModels
             _progressHistoryService = progressHistoryService;
 
             AddHabitCommand = new RelayCommandAsync(AddHabit);
+            ClearHabitCommand = new RelayCommand(ClearHabit);
 
             HabitDelateCommand = new RelayCommand<AtomicHabitModel>(HabitDelate);
             HabitEditCommand = new RelayCommand<AtomicHabitModel>(HabitEdit);
@@ -110,6 +112,11 @@ namespace WpfApp.Wpf.ViewModels
 
 
         }
+        private void ClearHabit(object parameter)
+        {
+            HabitTitle = string.Empty;
+            HabitDescription = string.Empty;
+        }
         private void HabitDelate(AtomicHabitModel habit)
         {
             _atomicHabitService.DeleteAsync(habit.Id);
@@ -136,12 +143,9 @@ namespace WpfApp.Wpf.ViewModels
 
         private async void AtomicHabit_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(AtomicHabitModel.IsHabitDone))
-            {
-                var atomicHabit = (AtomicHabitModel)sender;
-                await _progressHistoryService.AddProgressAsync(atomicHabit);
-                await _atomicHabitService.UpdateAsync(atomicHabit);
-            }
+            var atomicHabit = (AtomicHabitModel)sender;
+            await _progressHistoryService.AddProgressAsync(atomicHabit);
+            await _atomicHabitService.UpdateAsync(atomicHabit);
         }
 
     }

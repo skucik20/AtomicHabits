@@ -9,7 +9,7 @@
                 <ResourceDictionary Source="Helpers/DataTemplate.xaml"/>
 
 
-                <ui:ThemeResources RequestedTheme="Light"/>
+                <ui:ThemeResources RequestedTheme="Dark"/>
                 <ui:XamlControlsResources />
                 <!-- Other merged dictionaries here -->
             </ResourceDictionary.MergedDictionaries>

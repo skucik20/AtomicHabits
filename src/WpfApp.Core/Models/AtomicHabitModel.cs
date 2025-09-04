@@ -9,13 +9,24 @@ namespace WpfApp.Core.Models;
 
 public class AtomicHabitModel : BaseEntityModel
 {
+    private string _title = string.Empty;
+    private string _description = string.Empty;
     private bool _isHabitDone;
     private int _streak;
     private bool _isTextBlockReadOnly = true;
     private bool _isEditHabitModeOn = false;
 
-    public string Title { get; set; } = string.Empty;
-    public string Description { get; set; } = string.Empty;
+    public string Title
+    {
+        get => _title;
+        set { _title = value; OnPropertyChanged(nameof(Title)); }
+    }  
+    public string Description
+    {
+        get => _description;
+        set { _description = value; OnPropertyChanged(nameof(Description)); }
+    }
+
     public bool IsHabitDone
     {
         get => _isHabitDone;
@@ -42,8 +53,4 @@ public class AtomicHabitModel : BaseEntityModel
         get { return _isEditHabitModeOn; }
         set { _isEditHabitModeOn = value; OnPropertyChanged(nameof(IsEditHabitModeOn)); }
     }
-
-
-
-
 }

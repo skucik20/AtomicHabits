@@ -106,6 +106,8 @@ dotnet ef database update
     - [ ] Filtering the list
 - [ ] Logic for ProgresHistory -> some charts etc
 - [ ] Notyfications
+- [ ] Add info that habbit has beed added
+- [ ] Add autofocused textboxes
 
 ## Todo ⏳
 
