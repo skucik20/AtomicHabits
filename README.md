@@ -102,16 +102,17 @@ dotnet ef database update
 # Task List
 
 ## Backlog 📌
-- [ ] Editing the list
-    - [ ] Moving habits
-    - [ ] Filtering the list
+
 - [ ] Logic for ProgresHistory -> some charts etc
 - [ ] Notyfications
 - [ ] Add info that habbit has beed added
 - [ ] Add autofocused textboxes
+- [ ] Remove highliting of the list
 
 ## Todo ⏳
-
+- [ ] Editing the list
+    - [ ] Moving habits
+    - [ ] Filtering the list
     
 ## Completed ✅ 
 - [x] Create GitHub repository
