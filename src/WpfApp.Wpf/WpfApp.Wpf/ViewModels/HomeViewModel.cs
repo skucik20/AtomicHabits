@@ -54,7 +54,6 @@ namespace WpfApp.Wpf.ViewModels
         private void CreateAtomicHabit(object parameter)
         {
             _ = LoadData();
-
         }
 
         private async Task LoadData()
@@ -74,9 +73,7 @@ namespace WpfApp.Wpf.ViewModels
             if (e.PropertyName == nameof(AtomicHabitModel.IsHabitDone))
             {
                 var atomicHabit = (AtomicHabitModel)sender;
-
                 await _progressHistoryService.AddProgressAsync(atomicHabit);
-
                 await _atomicHabitService.UpdateAsync(atomicHabit);
             }
         }
