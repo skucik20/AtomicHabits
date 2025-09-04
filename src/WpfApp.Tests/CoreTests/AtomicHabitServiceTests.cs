@@ -18,7 +18,7 @@ namespace WpfApp.Tests.CoreTests
         private AppDbContext GetDbContext()
         {
             var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()) // osobna baza dla każdego testu
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()) // separet base for each test
                 .Options;
 
             return new AppDbContext(options);

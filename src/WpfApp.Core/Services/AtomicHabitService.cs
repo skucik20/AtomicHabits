@@ -57,7 +57,6 @@ namespace WpfApp.Core.Services
                 {
                     await ResetValue(atomicHabit);
                 }
-
             }
         }
 
@@ -78,7 +77,6 @@ namespace WpfApp.Core.Services
             foreach (var habit in atomicHabits)
             {
                 await ResetValue(habit);
-
             }
         }
 

@@ -31,15 +31,6 @@ namespace WpfApp.Core.Services
             _timer.Start();
         }
 
-        //private async void Timer_Elapsed(object sender, ElapsedEventArgs e)
-        //{
-        //    var now = DateTime.Now;
-        //    if (now.Hour == 0 && now.Minute == 0)
-        //    {
-        //        await _atomicHabitService.ResetValues();
-        //    }
-        //}
-
         protected virtual async Task OnTimerElapsed(DateTime now)
         {
             if (now.Hour == 0 && now.Minute == 0)
