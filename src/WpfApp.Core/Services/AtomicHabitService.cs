@@ -77,12 +77,9 @@ namespace WpfApp.Core.Services
 
             foreach (var habit in atomicHabits)
             {
-                //StreakSupport(habit);
-                //habit.IsHabitDone = false; // must be after StreakFlag
                 await ResetValue(habit);
 
             }
-            //await _context.SaveChangesAsync();
         }
 
         private void StreakSupport(AtomicHabitModel habit)
