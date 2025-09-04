@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:WpfApp.Wpf.Views"
              xmlns:cmd="clr-namespace:WpfApp.Wpf.Helpers.Commands"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:dd="urn:gong-wpf-dragdrop"
              mc:Ignorable="d" 
              xmlns:ui="http://schemas.modernwpf.com/2019"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -54,7 +55,13 @@
                     </StackPanel>
                 </Expander>
 
-                <ListView x:Name="HabitsListView" ItemsSource="{Binding AtimicHabitsCollection}" Grid.Column="1" Grid.Row="3" Focusable="False">
+                <ListView x:Name="HabitsListView" ItemsSource="{Binding AtimicHabitsCollection}" Grid.Column="1" Grid.Row="3" Focusable="False"
+                         dd:DragDrop.IsDragSource="True"
+                         dd:DragDrop.IsDropTarget="True"
+                         dd:DragDrop.UseDefaultDragAdorner="True"
+                         dd:DragDrop.DropHandler="{Binding}"
+                                           
+                          >
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border BorderThickness="1" CornerRadius="2" BorderBrush="White" Margin="0 5">
