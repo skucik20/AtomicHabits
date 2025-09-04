@@ -4,17 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp.Wpf.Views"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              xmlns:ui="http://schemas.modernwpf.com/2019"
              d:DesignHeight="450" d:DesignWidth="800">
     <ui:ScrollViewerEx>
+
         <StackPanel>
-            <TextBlock Text="Witaj! oto lista twoich Atomi Habitów"/>
+            <ui:ThemeShadowChrome Depth="5">
+                <TextBlock Text="Witaj! oto lista twoich Atomi Habitów" Background="White"/>
+            </ui:ThemeShadowChrome>
+            
             <ListView ItemsSource="{Binding AtimicHabitsCollection}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="5">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
@@ -39,6 +46,17 @@
                             <TextBlock Text="Streak" Grid.Column="2"/>
                             <TextBlock Text="{Binding Streak, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
+                            <ui:CommandBar Width="50" Height="50"
+                                       Grid.Column="3" Grid.RowSpan="3"
+                                       VerticalAlignment="Center">
+                                <ui:AppBarButton Icon="Delete" Label="Delete" 
+                                                 Command="{Binding DataContext.HabitButtonCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                 CommandParameter="{Binding}"/>
+                                <ui:AppBarButton Icon="Edit" Label="Edit"
+                                                 Command="{Binding DataContext.HabitEditCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                 CommandParameter="{Binding}"/>
+                            </ui:CommandBar>
+
 
                         </Grid>
                     </DataTemplate>
@@ -46,16 +64,14 @@
             </ListView>
             <Expander Header="Create new habbit">
                 <StackPanel>
-                    <StackPanel>
-                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Title"/>
-                        <TextBox Text="{Binding HabitTitle, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Description"/>
-                        <TextBox Text="{Binding HabitDescription, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Button Content="Add" Command="{Binding AddHabitCommand}"/>
-                    </StackPanel>
-                    <!--<Button Content="Add" Command="{Binding CreateAtomicHabitCommand}"/>-->
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Title"/>
+                    <TextBox Text="{Binding HabitTitle, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Description"/>
+                    <TextBox Text="{Binding HabitDescription, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="Add" Command="{Binding AddHabitCommand}"/>
                 </StackPanel>
             </Expander>
+
 
 
         </StackPanel>

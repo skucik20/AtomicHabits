@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using WpfApp.Core.Interfaces;
 using WpfApp.Core.Models;
@@ -22,6 +23,8 @@ namespace WpfApp.Wpf.ViewModels
         private string _habitDescription = string.Empty;
         private bool _isHabitChecked;
         public ICommand AddHabitCommand { get; set; }
+        public ICommand HabitDelateCommand { get; }
+        public ICommand HabitEditCommand { get; }
 
         private readonly IAtomicHabitService _atomicHabitService;
         private readonly IProgressHistoryService _progressHistoryService;
@@ -61,8 +64,26 @@ namespace WpfApp.Wpf.ViewModels
 
             AddHabitCommand = new RelayCommandAsync(AddHabit);
 
+            HabitDelateCommand = new RelayCommand<AtomicHabitModel>(HabitDelate);
+            HabitEditCommand = new RelayCommand<AtomicHabitModel>(HabitEdit);
+
+
             _ = _atomicHabitService.HasTodayAtomicHabitChecked();
             _ = LoadData();   
+        }
+
+
+
+        private void HabitEdit(AtomicHabitModel habit)
+        {
+            
+            //_atomicHabitService.UpdateAsync(habit);
+            //_ = LoadData();
+        }
+        private void HabitDelate(AtomicHabitModel habit)
+        {
+            _atomicHabitService.DeleteAsync(habit.Id);
+            _ = LoadData();
         }
 
         public async Task AddHabit(object parametr)
