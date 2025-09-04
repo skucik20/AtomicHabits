@@ -16,6 +16,7 @@ using WpfApp.Core.Services;
 using WpfApp.Wpf.Helpers;
 using WpfApp.Wpf.Helpers.Commands;
 using WpfApp.Wpf.ViewModels.Shared;
+using WpfApp.Wpf.Views;
 
 namespace WpfApp.Wpf.ViewModels
 {
@@ -116,6 +117,8 @@ namespace WpfApp.Wpf.ViewModels
         {
             await _atomicHabitService.AddAsync(new AtomicHabitModel { Title = HabitTitle, Description = HabitDescription });
             _ = LoadData();
+            var toast = new ToastWindow("Sukces!", "Twoja operacja zakończyła się pomyślnie.");
+            toast.Show();
         }
 
         private async Task LoadData()

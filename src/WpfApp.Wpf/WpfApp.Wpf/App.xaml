@@ -7,15 +7,17 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Helpers/DataTemplate.xaml"/>
-
-
+                <ResourceDictionary Source="Resources/Styles/HeaderStyle.xaml"/>
+                
                 <ui:ThemeResources RequestedTheme="Dark"/>
                 <ui:XamlControlsResources />
                 <!-- Other merged dictionaries here -->
+
             </ResourceDictionary.MergedDictionaries>
 
 
-
         </ResourceDictionary>
+        
+        
     </Application.Resources>
 </Application>

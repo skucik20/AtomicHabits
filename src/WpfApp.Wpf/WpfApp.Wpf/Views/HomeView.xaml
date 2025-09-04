@@ -25,23 +25,14 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="1" Grid.Row="1" Text="Witaj! oto lista twoich Atomi Habitów"
-           FontFamily="Segoe UI Semibold"
-           FontSize="24"
-           FontWeight="Bold"
-           TextWrapping="Wrap"
-           TextAlignment="Center"
-           Foreground="White">
-                    <TextBlock.Effect>
-                        <DropShadowEffect Color="Black" BlurRadius="5" ShadowDepth="2" Opacity="0.5"/>
-                    </TextBlock.Effect>
-                    
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="Hello! Here’s a list of your Atomic Habits" Style="{StaticResource HeaderTextBoxStyle}"/>
 
-
-                    <TextBlock.Padding>10</TextBlock.Padding>
-                </TextBlock>
-
-                <Expander Header="Create new habbit" Grid.Row="2" Grid.Column="1" Margin="20" Width="300">
+                <Expander Header="Create new habbit" Grid.Row="2" Grid.Column="1" Margin="20" Width="250" 
+                          HorizontalAlignment="Left"
+                          Background="{StaticResource SystemControlHighlightAccentBrush}" 
+                          BorderBrush="{DynamicResource SystemControlForegroundBaseMediumLowBrush}"
+                          BorderThickness="1" 
+                          Padding="20">
                     <StackPanel>
                         <TextBlock Grid.Column="0" Grid.Row="0" Text="Title"/>
                         <TextBox Text="{Binding HabitTitle, UpdateSourceTrigger=PropertyChanged}"/>
@@ -65,7 +56,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border BorderThickness="1" CornerRadius="2" BorderBrush="White" Margin="0 5">
-                                <Grid Margin="5">
+                                <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="200" />
                                         <ColumnDefinition Width="auto" />

@@ -108,10 +108,10 @@ dotnet ef database update
 - [ ] Add info that habbit has beed added
 - [ ] Add autofocused textboxes
 - [ ] Remove highliting of the list
+- [ ] Make toast in MVVM
 
 ## Todo ⏳
 - [ ] Editing the list
-    - [ ] Moving habits
     - [ ] Filtering the list
 
 ## Bugs
@@ -130,6 +130,7 @@ dotnet ef database update
 - [x] UI structure (hamburger menu serup)
 - [x] Deleting habits 
 - [x] Editing tasks
+- [x] Moving habits up and down in List
 
 ### Tests
 - [x] Write unit tests for AtomicHabitServiceTests
