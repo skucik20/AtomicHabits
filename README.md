@@ -120,6 +120,6 @@ dotnet ef database update
 - [✅] Logic for marking habits - when should be chcked and unchecked (on startapp and at midnight)
 - [✅] Streak logic - when increment and reset (on startapp and at midnight)
 ### Tests
-- [ ] Write unit tests for AtomicHabitServiceTests
-- [ ] Write unit tests for DailyResetServiceTests
+- [x Write unit tests for AtomicHabitServiceTests
+- [x] Write unit tests for DailyResetServiceTests
 - [ ] Write unit tests for ProgressHistoryServiceTests
