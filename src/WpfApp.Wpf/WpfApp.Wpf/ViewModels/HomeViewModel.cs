@@ -1,8 +1,10 @@
-﻿using System;
+﻿using ModernWpf.Controls;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,7 +26,8 @@ namespace WpfApp.Wpf.ViewModels
         private bool _isHabitChecked;
         public ICommand AddHabitCommand { get; set; }
         public ICommand HabitDelateCommand { get; }
-        public ICommand HabitEditCommand { get; }
+        public ICommand HabitEditCommand { get; set; }
+
 
         private readonly IAtomicHabitService _atomicHabitService;
         private readonly IProgressHistoryService _progressHistoryService;
@@ -68,17 +71,44 @@ namespace WpfApp.Wpf.ViewModels
             HabitEditCommand = new RelayCommand<AtomicHabitModel>(HabitEdit);
 
 
+
             _ = _atomicHabitService.HasTodayAtomicHabitChecked();
             _ = LoadData();   
         }
 
 
 
-        private void HabitEdit(AtomicHabitModel habit)
+
+        private void HabitEdit(AtomicHabitModel atomicHabit)
         {
-            
-            //_atomicHabitService.UpdateAsync(habit);
-            //_ = LoadData();
+
+            if(atomicHabit.IsEditHabitModeOn == false)
+            {
+                foreach (var item in AtimicHabitsCollection)
+                {
+                    if (atomicHabit.Id == item.Id)
+                    {
+
+                        item.IsTextBlockReadOnly = true;
+                    }
+                }
+            }
+            else
+            {
+                foreach (var item in AtimicHabitsCollection)
+                {
+                    if (atomicHabit.Id == item.Id)
+                    {
+
+                        item.IsTextBlockReadOnly = false;
+                    }
+                }
+            }
+
+
+
+
+
         }
         private void HabitDelate(AtomicHabitModel habit)
         {

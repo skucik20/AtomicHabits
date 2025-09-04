@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WpfApp.Core.Interfaces;
@@ -10,6 +11,8 @@ public class AtomicHabitModel : BaseEntityModel
 {
     private bool _isHabitDone;
     private int _streak;
+    private bool _isTextBlockReadOnly = true;
+    private bool _isEditHabitModeOn = false;
 
     public string Title { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
@@ -26,5 +29,21 @@ public class AtomicHabitModel : BaseEntityModel
 
     // Kolekcja historii nawyku
     public ICollection<ProgressHistoryModel> ProgressHistories { get; set; } = new List<ProgressHistoryModel>();
+
+    [NotMapped]
+    public bool IsTextBlockReadOnly
+    {
+        get { return _isTextBlockReadOnly; }
+        set { _isTextBlockReadOnly = value; OnPropertyChanged(nameof(IsTextBlockReadOnly)); }
+    }
+    [NotMapped]
+    public bool IsEditHabitModeOn
+    {
+        get { return _isEditHabitModeOn; }
+        set { _isEditHabitModeOn = value; OnPropertyChanged(nameof(IsEditHabitModeOn)); }
+    }
+
+
+
 
 }

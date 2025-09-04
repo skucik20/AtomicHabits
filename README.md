@@ -102,9 +102,7 @@ dotnet ef database update
 
 ## Backlog 📌
 - [ ] Editing the list
-    - [ ] Deleting habits
     - [ ] Moving habits
-    - [ ] Editing tasks
     - [ ] Filtering the list
 - [ ] Logic for ProgresHistory -> some charts etc
 - [ ] Notyfications
@@ -122,6 +120,8 @@ dotnet ef database update
 - [x] Logic for marking habits - when should be chcked and unchecked (on startapp and at midnight)
 - [x] Streak logic - when increment and reset (on startapp and at midnight)
 - [x] UI structure (hamburger menu serup)
+- [x] Deleting habits 
+- [x] Editing tasks
 ### Tests
 - [x] Write unit tests for AtomicHabitServiceTests
 - [x] Write unit tests for DailyResetServiceTests
