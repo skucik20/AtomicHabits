@@ -22,7 +22,7 @@ namespace WpfApp.Core.Services
             _context = context;
             _atomicHabitService = atomicHabitService;
             _timer = new System.Timers.Timer();
-            _timer.Interval = 1000 * 60; // sprawdzanie co minutę
+            _timer.Interval = 1000 * 60; // check every minute
             _timer.Elapsed += Timer_Elapsed;
         }
 
