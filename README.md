@@ -113,7 +113,11 @@ dotnet ef database update
 - [ ] Editing the list
     - [ ] Moving habits
     - [ ] Filtering the list
-    
+
+## Bugs
+
+- [ ] If you click on X in HabitTitle TextBox in edit mode app will crash NULL
+
 ## Completed ✅ 
 - [x] Create GitHub repository
 - [x] Set up project skeleton
@@ -131,3 +135,4 @@ dotnet ef database update
 - [x] Write unit tests for AtomicHabitServiceTests
 - [x] Write unit tests for DailyResetServiceTests
 - [x] Write unit tests for ProgressHistoryServiceTests
+
