@@ -97,3 +97,29 @@ cd WpfApp.Core
 dotnet ef migrations add <MigrationName>
 dotnet ef database update
 ```
+
+# Task List
+
+## Backlog 📌
+- [ ] Editing the list
+    - [ ] Deleting habits
+    - [ ] Moving habits
+    - [ ] Editing tasks
+    - [ ] Filtering the list
+
+## Todo ⏳
+
+    
+## Completed ✅ 
+- [✅] Create GitHub repository
+- [✅] Set up project skeleton
+- [✅] Table in db based on the AtomicHabitModel
+- [✅] Table in db based on the ProgressHistoryModel
+- [✅] Add new habit to list and database
+- [✅] Communication with the database and habitsList (checkBox update db)
+- [✅] Logic for marking habits - when should be chcked and unchecked (on startapp and at midnight)
+- [✅] Streak logic - when increment and reset (on startapp and at midnight)
+### Tests
+- [ ] Write unit tests for AtomicHabitServiceTests
+- [ ] Write unit tests for DailyResetServiceTests
+- [ ] Write unit tests for ProgressHistoryServiceTests
