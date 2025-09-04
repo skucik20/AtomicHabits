@@ -7,19 +7,19 @@ A WPF project following the MVVM architecture, with separation of application la
 
 - Create custom habits with descriptions
 - Mark completed habits daily
-- Track progress through charts and statistics
-- Habit reminders (push/desktop)
-- Filter habits by category or priority
-- Motivating weekly and monthly summaries
+- Track progress through charts and statistics (TODO)
+- Habit reminders (push/desktop) (TODO)
+- Filter habits by category or priority (TODO)
+- Motivating weekly and monthly summaries (TODO)
 
 ## How it works
 
 1. The user adds new habits with a description and (TODO: category).
-2. Each day, the user marks which habits were completed.
+2. Each day, the user marks which habits were completed. 
 3. If the application is running at midnight, it resets the checkboxes and increments the streaks.
 4. Upon startup, it checks whether yesterday's tasks were completed; if so, it resets the checkboxes and increments the streaks.
-5. The application generates progress charts and summaries.
-6. The user receives notifications reminding them of their habits.
+5. The application generates progress charts and summaries. (TODO)
+6. The user receives notifications reminding them of their habits. (TODO)
 
 ## Instalation
 
