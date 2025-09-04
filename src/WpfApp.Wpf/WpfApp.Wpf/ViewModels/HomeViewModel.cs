@@ -78,40 +78,29 @@ namespace WpfApp.Wpf.ViewModels
             _ = LoadData();   
         }
 
-
-
-
         private void HabitEdit(AtomicHabitModel atomicHabit)
         {
-
-            if(atomicHabit.IsEditHabitModeOn == false)
+            switch (atomicHabit.IsEditHabitModeOn)
             {
-                foreach (var item in AtimicHabitsCollection)
-                {
-                    if (atomicHabit.Id == item.Id)
-                    {
-
-                        item.IsTextBlockReadOnly = true;
-                    }
-                }
+                case true:
+                    SetEditToggle(atomicHabit, false);
+                    break;
+                case false:
+                    SetEditToggle(atomicHabit, true);
+                    break;
             }
-            else
-            {
-                foreach (var item in AtimicHabitsCollection)
-                {
-                    if (atomicHabit.Id == item.Id)
-                    {
-
-                        item.IsTextBlockReadOnly = false;
-                    }
-                }
-            }
-
-
-
-
-
         }
+
+
+        private void SetEditToggle(AtomicHabitModel atomicHabit, bool setTo)
+        {
+            foreach (var item in AtimicHabitsCollection)
+            {
+                if (atomicHabit.Id == item.Id)
+                    item.IsTextBlockReadOnly = setTo;
+            }
+        }
+
         private void ClearHabit(object parameter)
         {
             HabitTitle = string.Empty;

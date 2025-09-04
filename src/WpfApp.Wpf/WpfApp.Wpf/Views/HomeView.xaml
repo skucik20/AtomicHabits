@@ -63,12 +63,12 @@
                                         <ColumnDefinition Width="200" />
                                         <ColumnDefinition Width="auto" />
                                         <ColumnDefinition Width="100" />
-                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="150" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
-                                        <RowDefinition/>
+                                        <RowDefinition />
                                     </Grid.RowDefinitions>
                                     <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" IsReadOnly="{Binding IsTextBlockReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
 
@@ -89,25 +89,24 @@
                                     <TextBlock Text="Streak" Grid.Column="2"/>
                                     <TextBlock Text="{Binding Streak, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"/>
 
-                                    <ui:CommandBar Height="40"
-                           Grid.Column="3" Grid.RowSpan="3"
-                           VerticalAlignment="Center">
+                                        <ui:CommandBar Height="40" Grid.Column="3" Grid.RowSpan="3" VerticalAlignment="Center">
 
-                                        <ui:AppBarButton Icon="Delete" Label="Delete" 
+                                            <ui:AppBarButton Icon="Delete" Label="Delete" 
                                      Command="{Binding DataContext.HabitDelateCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                                      CommandParameter="{Binding}"/>
 
 
 
 
-                                        <ui:AppBarToggleButton Icon="Edit" Label="Edit"
+                                            <ui:AppBarToggleButton Icon="Edit" Label="Edit"
                                            IsChecked="{Binding IsEditHabitModeOn,UpdateSourceTrigger=PropertyChanged}"
                                            Command="{Binding DataContext.HabitEditCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                                            CommandParameter="{Binding}"/>
 
 
 
-                                    </ui:CommandBar>
+                                        </ui:CommandBar>
+                          
                                 </Grid>
 
                             </Border>
