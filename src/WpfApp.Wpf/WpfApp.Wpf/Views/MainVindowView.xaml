@@ -5,9 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp.Wpf.Views"
         mc:Ignorable="d"
-        Title="MainVindowView" Height="450" Width="800">
-    <StackPanel Orientation="Horizontal">
+        Title="MainVindowView" Height="450" Width="800"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        ui:WindowHelper.UseModernWindowStyle="True">
+    <!--<StackPanel Orientation="Horizontal">
         <local:HomeView DataContext="{Binding HomeViewModel}"/>
         <local:CreateAtomicHabitView DataContext="{Binding CreateAtomicHabitViewModel}"/>
-    </StackPanel>
+    </StackPanel>-->
+
+    <Grid>
+        <ui:NavigationView x:Name="NavView"
+                           PaneDisplayMode="LeftCompact"
+                           IsBackButtonVisible="Collapsed"
+                           CompactModeThresholdWidth="48"
+                           MenuItemsSource="{Binding MenuItems}"
+                           SelectedItem="{Binding SelectedMenuItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                           >
+            <ContentControl Content="{Binding CurrentView}"/>
+
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding HamburgerMenuSelectionChangedCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ui:NavigationView>
+    </Grid>
 </Window>

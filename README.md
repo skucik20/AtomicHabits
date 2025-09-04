@@ -110,7 +110,7 @@ dotnet ef database update
 - [ ] Notyfications
 
 ## Todo ⏳
-- [ ] UI structure
+
     
 ## Completed ✅ 
 - [x] Create GitHub repository
@@ -121,6 +121,7 @@ dotnet ef database update
 - [x] Communication with the database and habitsList (checkBox update db)
 - [x] Logic for marking habits - when should be chcked and unchecked (on startapp and at midnight)
 - [x] Streak logic - when increment and reset (on startapp and at midnight)
+- [x] UI structure (hamburger menu serup)
 ### Tests
 - [x] Write unit tests for AtomicHabitServiceTests
 - [x] Write unit tests for DailyResetServiceTests
