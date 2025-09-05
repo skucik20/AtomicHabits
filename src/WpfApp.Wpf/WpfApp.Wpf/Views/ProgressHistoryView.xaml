@@ -5,9 +5,38 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp.Wpf.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="Comeing Soon"/>
+             d:DesignHeight="450" d:DesignWidth="800"
+             >
+    <StackPanel Margin="50">
+        
+        <ComboBox ItemsSource="{Binding HabitHistorySelectionComboBox}" 
+                  SelectedItem="{Binding SeledtedHabitHistorySelectionComboBoxoperty, UpdateSourceTrigger=PropertyChanged}" 
+                  DisplayMemberPath="Content"/>
 
-    </Grid>
+        <ListView ItemsSource="{Binding ProgressCollection, UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="1" CornerRadius="2" BorderBrush="White" Width="150" Padding="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding HabitCheckDateTime, StringFormat=d}"  Width="100"/>
+                                <CheckBox IsChecked="{Binding IsHabitChecked}" IsEnabled="False"/>
+                            </StackPanel>
+                             
+
+                        </Grid>
+
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ListView>
+
+
+    </StackPanel>
 </UserControl>
