@@ -57,6 +57,8 @@ namespace WpfApp.Core.Services
                 if (!HasProgressToday)
                 {
                     await ResetValue(atomicHabit);
+                    //
+                    await _progressHistoryService.AddProgressAsync(atomicHabit);
                 }
             }
         }

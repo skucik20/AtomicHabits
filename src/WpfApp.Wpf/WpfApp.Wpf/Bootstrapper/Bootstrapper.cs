@@ -23,12 +23,12 @@ namespace WpfApp.Wpf.Bootstrapper
             ConfigureServices(serviceCollection);
             ServiceProvider = serviceCollection.BuildServiceProvider();
 
+            var dailyResetService = ServiceProvider.GetRequiredService<IDailyResetService>();
+            dailyResetService.Start();
+
             // Run main window
             var mainWindow = ServiceProvider.GetRequiredService<MainVindowView>();
             mainWindow.Show();
-
-            var dailyResetService = ServiceProvider.GetRequiredService<IDailyResetService>();
-            dailyResetService.Start();
         }
 
         private void ConfigureServices(ServiceCollection services)

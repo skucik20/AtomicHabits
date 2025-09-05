@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp.Wpf.Views"
              xmlns:cmd="clr-namespace:WpfApp.Wpf.Helpers.Commands"
+             xmlns:sharedVm="clr-namespace:WpfApp.Wpf.ViewModels.Shared"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:dd="urn:gong-wpf-dragdrop"
              mc:Ignorable="d" 
@@ -27,21 +28,28 @@
 
                 <TextBlock Grid.Column="1" Grid.Row="1" Text="Hello! Here’s a list of your Atomic Habits" Style="{StaticResource HeaderTextBoxStyle}"/>
 
-                <Expander Header="Create new habbit" Grid.Row="2" Grid.Column="1" Margin="20" Width="250" 
+                <Expander Header="Create new habbit" Grid.Row="2" Grid.Column="1" Margin="20" 
                           HorizontalAlignment="Left"
+                          ExpandDirection="Right"
                           Background="{StaticResource SystemControlHighlightAccentBrush}" 
                           BorderBrush="{DynamicResource SystemControlForegroundBaseMediumLowBrush}"
                           BorderThickness="1" 
-                          Padding="20">
-                    <StackPanel>
-                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Title"/>
-                        <TextBox Text="{Binding HabitTitle, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Description"/>
-                        <TextBox Text="{Binding HabitDescription, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Height="100" AllowDrop="True"/>
-                        <Grid>
-                            <Button Content="Add" Command="{Binding AddHabitCommand}"/>
-                            <Button Content="Clear" Command="{Binding ClearHabitCommand}" HorizontalAlignment="Right"/>
-                        </Grid>
+                          Padding="5">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Margin="5">
+                            <TextBlock Grid.Column="0" Grid.Row="0" Text="Title"/>
+                            <sharedVm:OnFocusTextSelectedTextBox Style="{StaticResource DefaultTextBoxStyle}" Text="{Binding HabitTitle, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+                            <Grid Margin="5 20 5 5">
+                                <Button Content="Add" Command="{Binding AddHabitCommand}" HorizontalAlignment="Left"/>
+                                <Button Content="Clear" Command="{Binding ClearHabitCommand}" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel Margin="5">
+                            <TextBlock Grid.Column="0" Grid.Row="0" Text="Description"/>
+                            <sharedVm:OnFocusTextSelectedTextBox Style="{StaticResource DefaultTextBoxStyle}" Text="{Binding HabitDescription, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="200" Height="100" AllowDrop="True"/>
+                        </StackPanel>
+                       
+       
                         
                     </StackPanel>
                 </Expander>
@@ -68,12 +76,13 @@
                                         <RowDefinition/>
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
-                                    <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" IsReadOnly="{Binding IsTextBlockReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <sharedVm:OnFocusTextSelectedTextBox Style="{StaticResource DefaultTextBoxStyle}"
+                                        Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" IsReadOnly="{Binding IsTextBlockReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
 
 
                                     <Expander Grid.Row="1" Header="Details">
                                         <Border  BorderBrush="Black" BorderThickness="1" CornerRadius="5" Padding="5">
-                                            <TextBox TextWrapping="Wrap" BorderThickness="0"
+                                            <sharedVm:OnFocusTextSelectedTextBox Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" BorderThickness="0"
                                Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
                                IsReadOnly="{Binding IsTextBlockReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
                                         </Border>

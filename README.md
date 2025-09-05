@@ -106,7 +106,7 @@ dotnet ef database update
 - [ ] Logic for ProgresHistory -> some charts etc
 - [ ] Notyfications
 - [ ] Add info that habbit has beed added
-- [ ] Add autofocused textboxes
+
 - [ ] Remove highliting of the list
 - [ ] Make toast in MVVM
 
@@ -131,6 +131,7 @@ dotnet ef database update
 - [x] Deleting habits 
 - [x] Editing tasks
 - [x] Moving habits up and down in List
+- [x] Add autofocused textboxes
 
 ### Tests
 - [x] Write unit tests for AtomicHabitServiceTests
