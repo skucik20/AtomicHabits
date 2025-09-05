@@ -33,6 +33,8 @@
     </Window.Resources>
     
     <Grid>
+
+
         <ui:NavigationView x:Name="NavView"
                            PaneDisplayMode="LeftCompact"
                            IsBackButtonVisible="Collapsed"
@@ -40,7 +42,20 @@
                            MenuItemsSource="{Binding MenuItems}"
                            SelectedItem="{Binding SelectedMenuItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                            >
-            <ContentControl Content="{Binding CurrentView}"/>
+            <Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                </Grid>
+                <Canvas x:Name="ParticleCanvas" Visibility="Visible"/>
+                <!-- Płótno na fale -->
+                <Canvas x:Name="WaveCanvas" Visibility="Collapsed" Height="10"/>
+                <ContentControl Content="{Binding CurrentView}" Grid.Row="1"/>
+            </Grid>
+            
 
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
@@ -48,5 +63,6 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ui:NavigationView>
+        
     </Grid>
 </Window>

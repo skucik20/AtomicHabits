@@ -106,7 +106,7 @@ dotnet ef database update
 - [ ] Logic for ProgresHistory -> some charts etc
 - [ ] Notyfications
 - [ ] Add info that habbit has beed added
-
+- [ ] Add some animations in background
 - [ ] Remove highliting of the list
 - [ ] Make toast in MVVM
 
