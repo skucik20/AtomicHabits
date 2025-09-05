@@ -105,14 +105,15 @@ dotnet ef database update
 
 - [ ] Logic for ProgresHistory -> some charts etc
 - [ ] Notyfications
-- [ ] Add info that habbit has beed added
 - [ ] Remove highliting of the list
 - [ ] Make toast in MVVM
 - [ ] Convert animations to MVVM
+- [ ] Filtering the list
+- [ ] Add cetegories to habits
 
 ## Todo ⏳
-- [ ] Editing the list
-    - [ ] Filtering the list
+
+
 
 ## Bugs
 
@@ -133,6 +134,8 @@ dotnet ef database update
 - [x] Moving habits up and down in List
 - [x] Add autofocused textboxes
 - [x] Add some animations in background
+- [x] Add info that habbit has beed added
+- [x] Created list of archive actions, displayes by combobox
 
 ### Tests
 - [x] Write unit tests for AtomicHabitServiceTests

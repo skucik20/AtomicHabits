@@ -28,9 +28,7 @@ namespace WpfApp.Wpf.ViewModels
         public HabitHistorySelectionComboBoxModel SeledtedHabitHistorySelectionComboBoxoperty
         {
             get { return _seledtedHabitHistorySelectionComboBox; }
-            set { _seledtedHabitHistorySelectionComboBox = value; OnPropertyChanged(nameof(SeledtedHabitHistorySelectionComboBoxoperty));
-                SeledtedHabitHistorySelectionComboBoxopertyChanged();
-            }
+            set { _seledtedHabitHistorySelectionComboBox = value; OnPropertyChanged(nameof(SeledtedHabitHistorySelectionComboBoxoperty)); }
         }
 
         public ObservableCollection<ProgressHistoryModel> ProgressCollection
@@ -58,8 +56,6 @@ namespace WpfApp.Wpf.ViewModels
             SeledtedHabitHistorySelectionComboBoxoperty = new HabitHistorySelectionComboBoxModel();
             foreach(var item in ProgressByHabit)
             {
-                var aa = AtimicHabitsCollection.FirstOrDefault(x => x.Id == item.Key).Title;
-                
                 HabitHistorySelectionComboBox.Add(new HabitHistorySelectionComboBoxModel
                 {
                     Id = item.Key,
@@ -68,17 +64,6 @@ namespace WpfApp.Wpf.ViewModels
                 });
             }
 
-        }
-
-        private void SeledtedHabitHistorySelectionComboBoxopertyChanged()
-        {
-            _ = LoadProgressAsync();
-        }
-
-        private async Task LoadProgressAsync()
-        {
-            IEnumerable<ProgressHistoryModel> progressEnumerable = await _progressHistoryService.GetProgressByHabitIdAsync(SeledtedHabitHistorySelectionComboBoxoperty.Id);
-            ProgressCollection = new ObservableCollection<ProgressHistoryModel>(progressEnumerable);
         }
 
         public async Task LoadProgressByHabitsAsync()
