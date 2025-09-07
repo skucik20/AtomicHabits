@@ -110,6 +110,9 @@ dotnet ef database update
 - [ ] Convert animations to MVVM
 - [ ] Filtering the list
 - [ ] Add cetegories to habits
+- [ ] Test to creating progressHistory on startapp -> added new funcionality to it so test needs to be modified
+- [ ] About page
+- [ ] Settings page
 
 ## Todo ⏳
 
