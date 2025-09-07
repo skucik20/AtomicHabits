@@ -49,8 +49,20 @@ namespace WpfApp.Wpf.Bootstrapper
             services.AddTransient<HomeViewModel>();
             services.AddTransient<MainVindowViewModel>();
             services.AddTransient<ProgressHistoryViewModel>();
+            services.AddTransient<AboutViewModel>();
+            services.AddTransient<SettingsViewModel>();
 
             // Views
+            services.AddTransient<AboutView>(provider => new AboutView
+            {
+                DataContext = provider.GetRequiredService<AboutViewModel>()
+            });
+
+            services.AddTransient<SettingsView>(provider => new SettingsView
+            {
+                DataContext = provider.GetRequiredService<SettingsViewModel>()
+            });
+
             services.AddTransient<ProgressHistoryView>(provider => new ProgressHistoryView
             {
                 DataContext = provider.GetRequiredService<ProgressHistoryViewModel>()

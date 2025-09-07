@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp.Wpf.ViewModels
 {
-    class AboutViewModel
+    public class AboutViewModel
     {
     }
 }
