@@ -28,7 +28,7 @@ namespace WpfApp.Wpf.ViewModels
         public NavigationViewItem SelectedMenuItem
         {
             get { return _selectedMenuItem; }
-            set { _selectedMenuItem = value; }
+            set { _selectedMenuItem = value; OnPropertyChanged(nameof(SelectedMenuItem)); }
         }
 
         public object CurrentView
@@ -48,16 +48,27 @@ namespace WpfApp.Wpf.ViewModels
 
         public HomeViewModel _homeViewModel { get; set; }
 		public ProgressHistoryViewModel _progressHistoryViewModel { get; }
-        public MainVindowViewModel(HomeViewModel homeViewModel, ProgressHistoryViewModel progressHistoryViewModel)
+		public AboutViewModel _aboutViewModel { get; }
+		public SettingsViewModel _settingsViewModel { get; }
+        public MainVindowViewModel(
+            HomeViewModel homeViewModel, 
+            ProgressHistoryViewModel progressHistoryViewModel,
+            AboutViewModel aboutViewModel,
+            SettingsViewModel settingsViewModel
+            )
         {
 
             _homeViewModel = homeViewModel;
             _progressHistoryViewModel = progressHistoryViewModel;
+            _aboutViewModel = aboutViewModel;
+            _settingsViewModel = settingsViewModel;
 
             HamburgerMenuSelectionChangedCommand = new RelayCommand(HamburgerMenuSelectionChanged);
 
             
             MenuItems.Add(new NavigationViewItem { Content = "Home", Icon = new SymbolIcon(Symbol.Home), Tag = "home" });
+            MenuItems.Add(new NavigationViewItem { Content = "About", Icon = new SymbolIcon(Symbol.Help), Tag = "about" });
+            SelectedMenuItem = MenuItems[0];
             MenuItems.Add(new NavigationViewItem { Content = "Progres history",
                 Icon = new FontIcon
                 {
@@ -66,8 +77,6 @@ namespace WpfApp.Wpf.ViewModels
                 },
 
                 Tag = "history" });
-            MenuItems.Add(new NavigationViewItem { Content = "About", Icon = new SymbolIcon(Symbol.Help), Tag = "about" });
-            SelectedMenuItem = MenuItems[0];
 
             CurrentView = _homeViewModel;
         }
@@ -82,8 +91,11 @@ namespace WpfApp.Wpf.ViewModels
                 case "history":
                     CurrentView = _progressHistoryViewModel;
                     break;
+                case "about":
+                    CurrentView = _aboutViewModel;
+                    break;
                 case "Ustawienia":
-                    CurrentView = _progressHistoryViewModel;
+                    CurrentView = _settingsViewModel;
                     break;
 
             }

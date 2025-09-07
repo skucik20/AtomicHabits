@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using WpfApp.Core.Interfaces;
+using WpfApp.Core.Migrations;
 using WpfApp.Core.Models;
 using WpfApp.Core.Models.Shared;
 using WpfApp.Wpf.ViewModels.Shared;
@@ -14,6 +17,7 @@ namespace WpfApp.Wpf.ViewModels
     public class HabitHistorySelectionComboBoxModel : BaseComboBoxModel
     {
         public ObservableCollection<ProgressHistoryModel> ProgressCollection { get; set; }
+        public ObservableCollection<DateTime> SelectedDates { get; set; }
     }
     public class ProgressHistoryViewModel :BaseViewModel
     {
@@ -28,7 +32,8 @@ namespace WpfApp.Wpf.ViewModels
         public HabitHistorySelectionComboBoxModel SeledtedHabitHistorySelectionComboBoxoperty
         {
             get { return _seledtedHabitHistorySelectionComboBox; }
-            set { _seledtedHabitHistorySelectionComboBox = value; OnPropertyChanged(nameof(SeledtedHabitHistorySelectionComboBoxoperty)); }
+            set { _seledtedHabitHistorySelectionComboBox = value; OnPropertyChanged(nameof(SeledtedHabitHistorySelectionComboBoxoperty));
+            }
         }
 
         public ObservableCollection<ProgressHistoryModel> ProgressCollection
@@ -60,10 +65,28 @@ namespace WpfApp.Wpf.ViewModels
                 {
                     Id = item.Key,
                     Content = AtimicHabitsCollection.FirstOrDefault(x => x.Id == item.Key).Title,
-                    ProgressCollection = item.Value
+                    ProgressCollection = item.Value,
+                    SelectedDates = ExtractDateFromHabitHistoryCollection(),
                 });
             }
 
+        }
+
+        private ObservableCollection<DateTime> ExtractDateFromHabitHistoryCollection()
+        {
+            var uniqueDates = new ObservableCollection<DateTime>();
+
+            foreach (var item in ProgressByHabit)
+            {
+                foreach(var model in item.Value)
+                {
+                    if (model.IsHabitChecked == true && model.AtomicHabitId == item.Key)
+                    {
+                        uniqueDates.Add(model.HabitCheckDateTime);
+                    }
+                }
+            }
+            return uniqueDates;
         }
 
         public async Task LoadProgressByHabitsAsync()
