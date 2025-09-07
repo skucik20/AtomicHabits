@@ -108,15 +108,13 @@ dotnet ef database update
 - [ ] Remove highliting of the list
 - [ ] Make toast in MVVM
 - [ ] Convert animations to MVVM
-- [ ] Filtering the list
-- [ ] Add cetegories to habits
 - [ ] Test to creating progressHistory on startapp -> added new funcionality to it so test needs to be modified
-- [ ] About page
-- [ ] Settings page
+- [ ] Unable to click on date button in calendar -> now there is workeround with border
 
 ## Todo ⏳
 
-
+- [ ] Add cetegories to habits
+- [ ] Create widget
 
 ## Bugs
 
@@ -139,6 +137,8 @@ dotnet ef database update
 - [x] Add some animations in background
 - [x] Add info that habbit has beed added
 - [x] Created list of archive actions, displayes by combobox
+- [x] About page
+- [x] Settings page
 
 ### Tests
 - [x] Write unit tests for AtomicHabitServiceTests

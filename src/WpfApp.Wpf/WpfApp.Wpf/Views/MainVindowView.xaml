@@ -30,6 +30,19 @@
         <Style x:Key="AppTitleBarBackButtonStyle" TargetType="ui:TitleBarButton" BasedOn="{StaticResource TitleBarBackButtonStyle}">
             <Setter Property="IsActive" Value="{Binding IsActive, ElementName=Window}" />
         </Style>
+
+
+        <Storyboard x:Key="ShrinkAnimation" Completed="ShrinkAnimation_Completed">
+            <!-- Animacja szerokości -->
+            <DoubleAnimation Storyboard.TargetProperty="Width"
+                             To="250" Duration="0:0:0.4"/>
+            <!-- Animacja wysokości -->
+            <DoubleAnimation Storyboard.TargetProperty="Height"
+                             To="100" Duration="0:0:0.4"/>
+            <!-- Opcjonalnie: zanikanie -->
+            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                             To="0.0" Duration="0:0:0.4"/>
+        </Storyboard>
     </Window.Resources>
     
     <Grid>
@@ -43,17 +56,12 @@
                            SelectedItem="{Binding SelectedMenuItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                            >
             <Grid>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="200"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                </Grid>
+
                 <Canvas x:Name="ParticleCanvas" Visibility="Visible"/>
                 <!-- Płótno na fale -->
                 <Canvas x:Name="WaveCanvas" Visibility="Collapsed" Height="10"/>
-                <ContentControl Content="{Binding CurrentView}" Grid.Row="1"/>
+                <ContentControl Content="{Binding CurrentView}"/>
+                <Button Content="Zwiń" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right" Command="{Binding ShowWidgetCommand}"/>
             </Grid>
             
 
@@ -63,6 +71,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ui:NavigationView>
-        
+
+
     </Grid>
 </Window>

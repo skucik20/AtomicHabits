@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -45,7 +46,8 @@ namespace WpfApp.Wpf.ViewModels
         }
 
         public ICommand HamburgerMenuSelectionChangedCommand { get; set; }
-
+        public ICommand ShowWidgetCommand { get; set; }
+        private WidgetWindowView? _widget;
         public HomeViewModel _homeViewModel { get; set; }
 		public ProgressHistoryViewModel _progressHistoryViewModel { get; }
 		public AboutViewModel _aboutViewModel { get; }
@@ -64,6 +66,7 @@ namespace WpfApp.Wpf.ViewModels
             _settingsViewModel = settingsViewModel;
 
             HamburgerMenuSelectionChangedCommand = new RelayCommand(HamburgerMenuSelectionChanged);
+            ShowWidgetCommand = new RelayCommand(ShowWidget);
 
             
             MenuItems.Add(new NavigationViewItem { Content = "Home", Icon = new SymbolIcon(Symbol.Home), Tag = "home" });
@@ -81,6 +84,24 @@ namespace WpfApp.Wpf.ViewModels
             CurrentView = _homeViewModel;
         }
 
+        public void ShowWidget(object param)
+        {
+            var widget = new WidgetWindowView
+            {
+                DataContext = this
+            };
+
+            // ustawiamy widget jako nowe główne okno aplikacji
+            Application.Current.MainWindow = widget;
+
+            widget.Show();
+
+            // zamykamy stare główne okno
+            Application.Current.Windows
+                .OfType<MainVindowView>()
+                .FirstOrDefault()
+                ?.Close();
+        }
         public void HamburgerMenuSelectionChanged(object param)
         {
             switch (SelectedMenuItem.Tag)

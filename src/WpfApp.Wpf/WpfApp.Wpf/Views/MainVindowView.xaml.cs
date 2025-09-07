@@ -135,5 +135,15 @@ namespace WpfApp.Wpf.Views
             ellipse.BeginAnimation(Canvas.TopProperty, moveAnim);
             ellipse.BeginAnimation(OpacityProperty, fadeAnim);
         }
+
+        private void ShrinkAnimation_Completed(object sender, EventArgs e)
+        {
+            // po animacji otwieramy widget
+            //var vm = DataContext as MainVindowViewModel;
+            //vm?.OpenWidget();
+
+            // zamykamy okno główne
+            this.Close();
+        }
     }
 }
