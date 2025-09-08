@@ -13,5 +13,6 @@
         >
     <Grid>
         <TextBlock Text="Widget" Style="{StaticResource HeaderTextBoxStyle}"/>
+        <Button Content="Window" Command="{Binding ShowMainWindowCommand}" Foreground="Black"/>
     </Grid>
 </Window>

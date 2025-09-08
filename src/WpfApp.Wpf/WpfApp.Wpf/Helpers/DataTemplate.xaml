@@ -19,4 +19,9 @@
         <views:SettingsView />
     </DataTemplate>
     
+    
+    <DataTemplate DataType="{x:Type vm:WidgetWindowViewModel}">
+        <views:WidgetWindowView />
+    </DataTemplate>
+    
 </ResourceDictionary>

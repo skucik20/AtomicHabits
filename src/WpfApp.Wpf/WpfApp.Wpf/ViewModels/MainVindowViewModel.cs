@@ -52,11 +52,13 @@ namespace WpfApp.Wpf.ViewModels
 		public ProgressHistoryViewModel _progressHistoryViewModel { get; }
 		public AboutViewModel _aboutViewModel { get; }
 		public SettingsViewModel _settingsViewModel { get; }
+		public WidgetWindowViewModel _widgetWindowViewModel { get; }
         public MainVindowViewModel(
             HomeViewModel homeViewModel, 
             ProgressHistoryViewModel progressHistoryViewModel,
             AboutViewModel aboutViewModel,
-            SettingsViewModel settingsViewModel
+            SettingsViewModel settingsViewModel,
+            WidgetWindowViewModel widgetWindowViewModel
             )
         {
 
@@ -64,6 +66,7 @@ namespace WpfApp.Wpf.ViewModels
             _progressHistoryViewModel = progressHistoryViewModel;
             _aboutViewModel = aboutViewModel;
             _settingsViewModel = settingsViewModel;
+            _widgetWindowViewModel = widgetWindowViewModel;
 
             HamburgerMenuSelectionChangedCommand = new RelayCommand(HamburgerMenuSelectionChanged);
             ShowWidgetCommand = new RelayCommand(ShowWidget);
@@ -88,7 +91,7 @@ namespace WpfApp.Wpf.ViewModels
         {
             var widget = new WidgetWindowView
             {
-                DataContext = this
+                DataContext = _widgetWindowViewModel
             };
 
             // ustawiamy widget jako nowe główne okno aplikacji
@@ -100,7 +103,7 @@ namespace WpfApp.Wpf.ViewModels
             Application.Current.Windows
                 .OfType<MainVindowView>()
                 .FirstOrDefault()
-                ?.Close();
+                ?.Hide();
         }
         public void HamburgerMenuSelectionChanged(object param)
         {

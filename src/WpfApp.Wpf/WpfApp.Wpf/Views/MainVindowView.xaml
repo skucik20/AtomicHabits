@@ -30,19 +30,6 @@
         <Style x:Key="AppTitleBarBackButtonStyle" TargetType="ui:TitleBarButton" BasedOn="{StaticResource TitleBarBackButtonStyle}">
             <Setter Property="IsActive" Value="{Binding IsActive, ElementName=Window}" />
         </Style>
-
-
-        <Storyboard x:Key="ShrinkAnimation" Completed="ShrinkAnimation_Completed">
-            <!-- Animacja szerokości -->
-            <DoubleAnimation Storyboard.TargetProperty="Width"
-                             To="250" Duration="0:0:0.4"/>
-            <!-- Animacja wysokości -->
-            <DoubleAnimation Storyboard.TargetProperty="Height"
-                             To="100" Duration="0:0:0.4"/>
-            <!-- Opcjonalnie: zanikanie -->
-            <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                             To="0.0" Duration="0:0:0.4"/>
-        </Storyboard>
     </Window.Resources>
     
     <Grid>
