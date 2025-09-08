@@ -28,10 +28,7 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <!--<TextBlock Text="About page comeing soon" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource HeaderTextBoxStyle}"/>-->
-
-
-        <Grid Margin="8">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="3*" />
@@ -49,64 +46,43 @@
                     <Image Stretch="Uniform" ToolTip="Atomic Habits logo" />
                 </Border>
 
-                <TextBlock Style="{StaticResource HeaderText}" Margin="0,12,0,2" HorizontalAlignment="Center">Atomic Habits</TextBlock>
-                <TextBlock Style="{StaticResource BodyText}" FontStyle="Italic" HorizontalAlignment="Center">Build small habits, achieve big results</TextBlock>
+                <TextBlock Style="{StaticResource HeaderText}" Text="Atomic Habits" Margin="0,12,0,2" HorizontalAlignment="Center"/>
+                <TextBlock Style="{StaticResource BodyText}"
+                           Text="Build small habits, achieve big results"
+                           FontStyle="Italic" HorizontalAlignment="Center"/>
 
-                <StackPanel Orientation="Horizontal" Margin="0,14,0,0" HorizontalAlignment="Center">
-                    <Button Content="Rate this app" Margin="4,0" Padding="8,6" Command="{Binding RateCommand}" />
-                    <Button Content="Share" Margin="4,0" Padding="8,6" Command="{Binding ShareCommand}" />
-                </StackPanel>
+
             </StackPanel>
 
             <!-- About Text -->
             <StackPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Orientation="Vertical" VerticalAlignment="Top">
                 <TextBlock Style="{StaticResource HeaderText}">About this app</TextBlock>
-                <TextBlock Style="{StaticResource BodyText}" Margin="0,6,0,0">
-                Atomic Habits is a simple, everyday habit tracker and coach designed to help you form tiny, consistent changes that compound into significant progress over time. The app emphasizes habit stacking, environment design, and iterative improvement so you can turn small actions into long-lasting routines.
-                </TextBlock>
+                <TextBlock Style="{StaticResource BodyText}"
+                           Text="Atomic Habits is a simple, everyday habit tracker and coach designed to help you form tiny, consistent changes that compound into significant progress over time. The app emphasizes habit stacking, environment design, and iterative improvement so you can turn small actions into long-lasting routines."
+                           Margin="0,6,0,0"/>
 
-                <TextBlock Style="{StaticResource HeaderText}" Margin="0,18,0,4">Inspired by the book</TextBlock>
-                <TextBlock Style="{StaticResource BodyText}" Margin="0,6,0,0">
-                This application is inspired by *Atomic Habits* by James Clear. While the app does not replace the original book, it implements many practical techniques described there — such as focusing on systems over goals, making habits obvious and attractive, and reducing friction for desired behaviors.
-                </TextBlock>
+                <TextBlock Style="{StaticResource HeaderText}" Text="Inspired by the book" Margin="0,18,0,4"/>
+                <TextBlock Style="{StaticResource BodyText}"
+                           Text="This application is inspired by *Atomic Habits* by James Clear. While the app does not replace the original book, it implements many practical techniques described there — such as focusing on systems over goals, making habits obvious and attractive, and reducing friction for desired behaviors."
+                           Margin="0,6,0,0"/>
 
-                <TextBlock Style="{StaticResource BodyText}" Margin="0,12,0,0">
-                If you'd like to learn more about the ideas that shaped this app, check out the book or visit the author's site.
-                </TextBlock>
+
+                <TextBlock Style="{StaticResource BodyText}" 
+                           Text="If you'd like to learn more about the ideas that shaped this app, check out the book or visit the author's site."
+                           Margin="0,12,0,0"/>
 
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <Button Style="{StaticResource LinkButton}" Command="{Binding OpenBookLinkCommand}" ToolTip="Open Atomic Habits by James Clear">
-                        <TextBlock TextDecorations="Underline">Read the book</TextBlock>
-                    </Button>
-                    <TextBlock Text=" • " Margin="6,0" VerticalAlignment="Center" />
                     <Button Style="{StaticResource LinkButton}" Command="{Binding OpenAuthorSiteCommand}">
                         <TextBlock TextDecorations="Underline">Author's website</TextBlock>
                     </Button>
                 </StackPanel>
 
-                <!-- Technical / Legal -->
-                <StackPanel Orientation="Horizontal" Margin="0,22,0,0">
-                    <TextBlock Style="{StaticResource BodyText}" Text="Version: " />
-                    <TextBlock Style="{StaticResource BodyText}" FontWeight="Bold" Text="{Binding AppVersion}" />
-                    <TextBlock Text="    " />
-                    <TextBlock Style="{StaticResource BodyText}" Text="© " />
-                    <TextBlock Style="{StaticResource BodyText}" FontWeight="Bold" Text="{Binding CopyrightOwner}" />
-                </StackPanel>
 
-                <TextBlock Style="{StaticResource BodyText}" Margin="0,10,0,0">
-                This app is an independent project inspired by the ideas in the original book. It is not affiliated with or endorsed by the author or publisher. All trademarks and copyrights belong to their respective owners.
-                </TextBlock>
+                <TextBlock Style="{StaticResource BodyText}" Margin="0,10,0,0"
+                           Text="This app is an independent project inspired by the ideas in the original book. It is not affiliated with or endorsed by the author or publisher. All trademarks and copyrights belong to their respective owners."/>
+
             </StackPanel>
-
-            <!-- Footer: Accessibility & Privacy -->
-            <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,12,0,0">
-                <Button Content="Privacy Policy" Style="{StaticResource LinkButton}" Command="{Binding OpenPrivacyCommand}" />
-                <TextBlock Text="  |  " VerticalAlignment="Center" />
-                <Button Content="Open Source Licenses" Style="{StaticResource LinkButton}" Command="{Binding OpenLicensesCommand}" />
-                <TextBlock Text="  |  " VerticalAlignment="Center" />
-                <Button Content="Close" Margin="12,0,0,0" Padding="10,6" IsDefault="True" Command="{Binding CloseCommand}" />
-            </StackPanel>
-
+            
         </Grid>
     </Grid>
     
