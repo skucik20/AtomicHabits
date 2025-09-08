@@ -21,24 +21,16 @@ namespace WpfApp.Wpf.ViewModels
 
         private void ShowMainWindow(object parameter)
         {
-            //var widget = new WidgetWindowView
-            //{
-            //    DataContext = this
-            //};
 
-            //// ustawiamy widget jako nowe główne okno aplikacji
-            //Application.Current.MainWindow = widget;
-
-            //widget.Show();
-
-            // zamykamy stare główne okno
+            // close widget
             Application.Current.Windows
                 .OfType<WidgetWindowView>()
                 .FirstOrDefault()
                 ?.Close();
 
 
-            // zamykamy stare główne okno
+            // unhide main window
+            //TODO is main window Application.Current.MainWindow
             Application.Current.Windows
                 .OfType<MainVindowView>()
                 .FirstOrDefault()

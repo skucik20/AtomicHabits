@@ -5,11 +5,13 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 using WpfApp.Core.Interfaces;
 using WpfApp.Core.Models;
 using WpfApp.Core.Services;
@@ -30,13 +32,23 @@ namespace WpfApp.Wpf.ViewModels
         public ICommand HabitDelateCommand { get; }
         public ICommand HabitEditCommand { get; set; }
 
+        public ICommand ShowMainWindowCommand { get; set; }
+
 
         private readonly IAtomicHabitService _atomicHabitService;
         private readonly IProgressHistoryService _progressHistoryService;
 
-        private ObservableCollection<AtomicHabitModel> _atimicHabitsCollection;
+        public ObservableCollection<AtomicHabitModel> AtimicHabitsCollection { get; set; }
 
         #region Properties
+        private AtomicHabitModel _currentAtomicHabit;
+
+        public AtomicHabitModel CurrentAtomicHabit
+        {
+            get { return _currentAtomicHabit; }
+            set { _currentAtomicHabit = value; OnPropertyChanged(nameof(CurrentAtomicHabit)); }
+        }
+
         public string HabitTitle
         {
             get { return _habitTitle; }
@@ -54,14 +66,15 @@ namespace WpfApp.Wpf.ViewModels
             set { _isHabitChecked = value; OnPropertyChanged(nameof(IsHabitChecked)); }
         }
         #endregion
-        public ObservableCollection<AtomicHabitModel> AtimicHabitsCollection
-        {
-            get { return _atimicHabitsCollection; }
-            set { _atimicHabitsCollection = value; }
-        }
+
+
+        private int _currentIndex = 0;
+        private DispatcherTimer _timer;
+
 
         public HomeViewModel(IAtomicHabitService atomicHabitService, IProgressHistoryService progressHistoryService)
         {
+
             AtimicHabitsCollection = new ObservableCollection<AtomicHabitModel>();
             
             _atomicHabitService = atomicHabitService;
@@ -69,6 +82,7 @@ namespace WpfApp.Wpf.ViewModels
 
             AddHabitCommand = new RelayCommandAsync(AddHabit);
             ClearHabitCommand = new RelayCommand(ClearHabit);
+            ShowMainWindowCommand = new RelayCommand(ShowMainWindow);
 
             HabitDelateCommand = new RelayCommand<AtomicHabitModel>(HabitDelate);
             HabitEditCommand = new RelayCommand<AtomicHabitModel>(HabitEdit);
@@ -76,7 +90,58 @@ namespace WpfApp.Wpf.ViewModels
 
 
             _ = _atomicHabitService.HasTodayAtomicHabitChecked();
-            _ = LoadData();   
+            _ = LoadData();
+
+            if (AtimicHabitsCollection.Count > 0)
+                CurrentAtomicHabit = AtimicHabitsCollection[0];
+
+            _timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(10)
+            };
+            _timer.Tick += Timer_Tick;
+            _timer.Start();
+
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            ObservableCollection<AtomicHabitModel> falseCollection = new ObservableCollection<AtomicHabitModel>();
+
+            foreach(var habit in AtimicHabitsCollection)
+            {
+                if(habit.IsHabitDone == false)
+                {
+                    falseCollection.Add(habit);
+                }
+            }
+
+            if (falseCollection.Count == 0) return;
+
+            _currentIndex++;
+            if (_currentIndex >= falseCollection.Count)
+                _currentIndex = 0;
+
+            
+            CurrentAtomicHabit = falseCollection[_currentIndex];
+        }
+
+        private void ShowMainWindow(object parameter)
+        {
+
+            // close widget
+            Application.Current.Windows
+                .OfType<WidgetWindowView>()
+                .FirstOrDefault()
+                ?.Close();
+
+
+            // unhide main window
+            //TODO is main window Application.Current.MainWindow
+            Application.Current.Windows
+                .OfType<MainVindowView>()
+                .FirstOrDefault()
+                ?.Show();
         }
 
         private void HabitEdit(AtomicHabitModel atomicHabit)
@@ -91,7 +156,6 @@ namespace WpfApp.Wpf.ViewModels
                     break;
             }
         }
-
 
         private void SetEditToggle(AtomicHabitModel atomicHabit, bool setTo)
         {

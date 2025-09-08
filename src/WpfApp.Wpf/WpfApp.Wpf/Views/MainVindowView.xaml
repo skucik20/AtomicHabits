@@ -5,17 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp.Wpf.Views"
         mc:Ignorable="d"
-         
-        Height="450" Width="800"
-        xmlns:ui="http://schemas.modernwpf.com/2019"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        x:Name="MainWindow"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="True"
         
         WindowStartupLocation="CenterOwner"
         
         ui:TitleBar.ExtendViewIntoTitleBar="True"
-        
-
+        ResizeMode="NoResize"
+        Height="650" Width="820"
         >
     <!--ui:TitleBar.Style="{DynamicResource AppTitleBarStyle}"-->
     <!--ui:TitleBar.ButtonStyle="{DynamicResource AppTitleBarButtonStyle}"
@@ -31,7 +30,7 @@
             <Setter Property="IsActive" Value="{Binding IsActive, ElementName=Window}" />
         </Style>
     </Window.Resources>
-    
+
     <Grid>
 
 
@@ -45,10 +44,9 @@
             <Grid>
 
                 <Canvas x:Name="ParticleCanvas" Visibility="Visible"/>
-                <!-- Płótno na fale -->
                 <Canvas x:Name="WaveCanvas" Visibility="Collapsed" Height="10"/>
                 <ContentControl Content="{Binding CurrentView}"/>
-                <Button Content="Zwiń" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right" Command="{Binding ShowWidgetCommand}"/>
+                
             </Grid>
             
 
@@ -58,7 +56,10 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ui:NavigationView>
-
+        <Button Content="Widget" Margin="10"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Command="{Binding ShowWidgetCommand}"/>
 
     </Grid>
 </Window>

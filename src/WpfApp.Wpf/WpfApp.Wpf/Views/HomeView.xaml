@@ -56,12 +56,10 @@
                 <!--Background="{DynamicResource SystemControlDisabledBaseLowBrush}"-->
                 <Border Grid.Column="1" Grid.Row="3" Background="Black" CornerRadius="10" BorderBrush="White" BorderThickness="1" Padding="0 10">
                     <ListView x:Name="HabitsListView" ItemsSource="{Binding AtimicHabitsCollection}" Focusable="False"
-         dd:DragDrop.IsDragSource="True"
-         dd:DragDrop.IsDropTarget="True"
-         dd:DragDrop.UseDefaultDragAdorner="True"
-         dd:DragDrop.DropHandler="{Binding}"
-                           
-          >
+                             dd:DragDrop.IsDragSource="True"
+                             dd:DragDrop.IsDropTarget="True"
+                             dd:DragDrop.UseDefaultDragAdorner="True"
+                             dd:DragDrop.DropHandler="{Binding}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border BorderThickness="1" CornerRadius="2" BorderBrush="White" Margin="0 5">

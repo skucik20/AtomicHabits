@@ -30,10 +30,16 @@ namespace WpfApp.Wpf.Views
 
             Loaded += (s, e) =>
             {
+
+                var app = Application.Current.Windows
+                            .OfType<MainVindowView>()
+                            .FirstOrDefault();
+
                 // Pozycjonowanie w prawym dolnym rogu ekranu
+
                 var workingArea = SystemParameters.WorkArea;
-                Left = workingArea.Right - Width - 10;
-                Top = workingArea.Bottom - Height - 10;
+                Left = app.Left + app.ActualWidth - Width - 10;
+                Top = app.Top + app.ActualHeight - Height - 10;
 
                 // Timer do automatycznego zamknięcia
                 var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(durationSeconds) };

@@ -47,18 +47,17 @@ namespace WpfApp.Wpf.ViewModels
 
         public ICommand HamburgerMenuSelectionChangedCommand { get; set; }
         public ICommand ShowWidgetCommand { get; set; }
-        private WidgetWindowView? _widget;
+
         public HomeViewModel _homeViewModel { get; set; }
 		public ProgressHistoryViewModel _progressHistoryViewModel { get; }
 		public AboutViewModel _aboutViewModel { get; }
 		public SettingsViewModel _settingsViewModel { get; }
-		public WidgetWindowViewModel _widgetWindowViewModel { get; }
+
         public MainVindowViewModel(
             HomeViewModel homeViewModel, 
             ProgressHistoryViewModel progressHistoryViewModel,
             AboutViewModel aboutViewModel,
-            SettingsViewModel settingsViewModel,
-            WidgetWindowViewModel widgetWindowViewModel
+            SettingsViewModel settingsViewModel
             )
         {
 
@@ -66,12 +65,11 @@ namespace WpfApp.Wpf.ViewModels
             _progressHistoryViewModel = progressHistoryViewModel;
             _aboutViewModel = aboutViewModel;
             _settingsViewModel = settingsViewModel;
-            _widgetWindowViewModel = widgetWindowViewModel;
 
             HamburgerMenuSelectionChangedCommand = new RelayCommand(HamburgerMenuSelectionChanged);
-            ShowWidgetCommand = new RelayCommand(ShowWidget);
+            ShowWidgetCommand = new RelayCommand(ShowWidget); 
 
-            
+
             MenuItems.Add(new NavigationViewItem { Content = "Home", Icon = new SymbolIcon(Symbol.Home), Tag = "home" });
             MenuItems.Add(new NavigationViewItem { Content = "About", Icon = new SymbolIcon(Symbol.Help), Tag = "about" });
             SelectedMenuItem = MenuItems[0];
@@ -91,7 +89,7 @@ namespace WpfApp.Wpf.ViewModels
         {
             var widget = new WidgetWindowView
             {
-                DataContext = _widgetWindowViewModel
+                DataContext = _homeViewModel
             };
 
             // ustawiamy widget jako nowe główne okno aplikacji
