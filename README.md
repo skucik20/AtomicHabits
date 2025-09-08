@@ -110,15 +110,20 @@ dotnet ef database update
 - [ ] Convert animations to MVVM
 - [ ] Test to creating progressHistory on startapp -> added new funcionality to it so test needs to be modified
 - [ ] Unable to click on date button in calendar -> now there is workeround with border
+- [ ] Ask user if he is sure to delate habbit
+- [ ] Fix problem with close button in widget - sholud exit whole app
 
 ## Todo ⏳
 
 - [ ] Add cetegories to habits
-- [ ] Create widget
+
+- [ ] Update about page
 
 ## Bugs
 
 - [ ] If you click on X in HabitTitle TextBox in edit mode app will crash NULL
+- [ ] Scroll does not work on list in Progrss history
+- [ ] If you delate habbit in combobox in progress history it still remains
 
 ## Completed ✅ 
 - [x] Create GitHub repository
@@ -139,6 +144,8 @@ dotnet ef database update
 - [x] Created list of archive actions, displayes by combobox
 - [x] About page
 - [x] Settings page
+- [x] Fix toast to the app corner not the window
+- [x] Create widget 
 
 ### Tests
 - [x] Write unit tests for AtomicHabitServiceTests
