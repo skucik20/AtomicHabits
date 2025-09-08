@@ -23,5 +23,12 @@ namespace WpfApp.Wpf.Views
         {
             InitializeComponent();
         }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            // Przesuwanie okna po złapaniu myszką
+            if (e.ButtonState == MouseButtonState.Pressed)
+                this.DragMove();
+        }
     }
 }

@@ -4,15 +4,28 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp.Wpf.Views"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True"
         mc:Ignorable="d"
-        Title="Widget"
-        Height="100" Width="250"
-        WindowStyle="ToolWindow"
+        
+        Height="100" Width="450"
+        Title="Atomic habbits"
         ResizeMode="NoResize"
+        WindowStyle="ToolWindow"
         Topmost="True"
         >
+    <!--
+    WindowStyle="ToolWindow"
+    Title="Widget"         AllowsTransparency="True"
+       Background="Transparent"       -->
     <Grid>
-        <TextBlock Text="Widget" Style="{StaticResource HeaderTextBoxStyle}"/>
-        <Button Content="Window" Command="{Binding ShowMainWindowCommand}" Foreground="Black"/>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Habit:" VerticalAlignment="Center" Style="{StaticResource HeaderTextBoxStyle}" />
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left"  Text="{Binding CurrentAtomicHabit.Title, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource HeaderTextBoxStyle}"/>
+            <CheckBox IsChecked="{Binding CurrentAtomicHabit.IsHabitDone, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content=">" Command="{Binding ShowMainWindowCommand}" Width="30"/>
+        </StackPanel>
+
+
     </Grid>
 </Window>
