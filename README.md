@@ -110,14 +110,15 @@ dotnet ef database update
 - [ ] Convert animations to MVVM
 - [ ] Test to creating progressHistory on startapp -> added new funcionality to it so test needs to be modified
 - [ ] Unable to click on date button in calendar -> now there is workeround with border
-- [ ] Ask user if he is sure to delate habbit
+
 - [ ] Fix problem with close button in widget - sholud exit whole app
+- [ ] Unable to add empty or repeted habit title
+- [ ] Add picture if habbit list is empty
 
 ## Todo ⏳
 
 - [ ] Add cetegories to habits
 
-- [ ] Update about page
 
 ## Bugs
 
@@ -146,6 +147,8 @@ dotnet ef database update
 - [x] Settings page
 - [x] Fix toast to the app corner not the window
 - [x] Create widget 
+- [x] Update about page
+- [x] Ask user if he is sure to delate habbit
 
 ### Tests
 - [x] Write unit tests for AtomicHabitServiceTests

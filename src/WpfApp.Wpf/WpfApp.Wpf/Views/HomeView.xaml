@@ -62,7 +62,7 @@
                              dd:DragDrop.DropHandler="{Binding}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderThickness="1" CornerRadius="2" BorderBrush="White" Margin="0 5">
+                                <Border BorderThickness="1" CornerRadius="2" BorderBrush="White" Margin="0 5" Background="Orange">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="200" />
@@ -76,46 +76,42 @@
                                             <RowDefinition />
                                         </Grid.RowDefinitions>
                                         <sharedVm:OnFocusTextSelectedTextBox Style="{StaticResource DefaultTextBoxStyle}"
-                        Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" IsReadOnly="{Binding IsTextBlockReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
+                                                                             Margin="5"
+                        Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" 
+                                                                             IsReadOnly="{Binding IsTextBlockReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
 
 
-                                        <Expander Grid.Row="1" Header="Details">
-                                            <Border  BorderBrush="Black" BorderThickness="1" CornerRadius="5" Padding="5">
+                                        <Expander Grid.Row="1" Header="Details" Margin="5">
+                                            <!--<Border  BorderBrush="Black" BorderThickness="1" CornerRadius="5" Padding="5">-->
                                                 <sharedVm:OnFocusTextSelectedTextBox Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" BorderThickness="0"
                Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
                IsReadOnly="{Binding IsTextBlockReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
-                                            </Border>
+                                            <!--</Border>-->
                                         </Expander>
 
 
                                         <TextBlock Text="Status" Grid.Column="1"/>
-                                        <CheckBox  Grid.Row="1" Grid.Column="1"
-                               IsChecked="{Binding IsHabitDone, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <CheckBox  Grid.Row="1" Grid.Column="1" 
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"
+                                                   IsChecked="{Binding IsHabitDone, UpdateSourceTrigger=PropertyChanged}"/>
 
                                         <TextBlock Text="Streak" Grid.Column="2"/>
                                         <TextBlock Text="{Binding Streak, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"/>
 
-                                        <ui:CommandBar Height="40" Grid.Column="3" Grid.RowSpan="3" VerticalAlignment="Center">
-
+                                        <ui:CommandBar Height="35" Grid.Column="3" Grid.RowSpan="3" VerticalAlignment="Center">
                                             <ui:AppBarButton Icon="Delete" Label="Delete" 
-                     Command="{Binding DataContext.HabitDelateCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
-                     CommandParameter="{Binding}"/>
-
-
-
+                                                             Command="{Binding DataContext.HabitDelateCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                             CommandParameter="{Binding}"/>
 
                                             <ui:AppBarToggleButton Icon="Edit" Label="Edit"
-                           IsChecked="{Binding IsEditHabitModeOn,UpdateSourceTrigger=PropertyChanged}"
-                           Command="{Binding DataContext.HabitEditCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
-                           CommandParameter="{Binding}"/>
-
-
-
+                                                                   IsChecked="{Binding IsEditHabitModeOn,UpdateSourceTrigger=PropertyChanged}"
+                                                                   Command="{Binding DataContext.HabitEditCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                                   CommandParameter="{Binding}"/>
                                         </ui:CommandBar>
-
                                     </Grid>
-
                                 </Border>
+                                
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ListView>

@@ -171,10 +171,23 @@ namespace WpfApp.Wpf.ViewModels
             HabitTitle = string.Empty;
             HabitDescription = string.Empty;
         }
-        private void HabitDelate(AtomicHabitModel habit)
+        private async void HabitDelate(AtomicHabitModel habit)
         {
-            _atomicHabitService.DeleteAsync(habit.Id);
-            _ = LoadData();
+            var dialog = new ContentDialog
+            {
+                Title = "Note",
+                Content = "Are you sure you want to delate habit",
+                PrimaryButtonText = "Yes",
+                CloseButtonText = "No"
+            };
+
+            ContentDialogResult result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                _atomicHabitService.DeleteAsync(habit.Id);
+                _ = LoadData();
+            }
         }
 
         public async Task AddHabit(object parametr)
