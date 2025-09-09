@@ -14,6 +14,7 @@ namespace WpfApp.Core.Data
     {
         public DbSet<AtomicHabitModel> AtomicHabits { get; set; }
         public DbSet<ProgressHistoryModel> ProgressHistory { get; set; }
+        public DbSet<CategoryModel> Categories { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) 
         {
@@ -23,6 +24,7 @@ namespace WpfApp.Core.Data
         {
             modelBuilder.Entity<AtomicHabitModel>().ToTable("AtomicHabits");
             modelBuilder.Entity<ProgressHistoryModel>().ToTable("ProgressHistory");
+            modelBuilder.Entity<CategoryModel>().ToTable("Categories");
         }
     }
 

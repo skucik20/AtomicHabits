@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection.Metadata.Ecma335;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WpfApp.Core.Interfaces;
@@ -37,6 +38,19 @@ public class AtomicHabitModel : BaseEntityModel
         get => _streak;
         set { _streak = value; OnPropertyChanged(nameof(Streak)); }
     }
+
+    // klucz obcy
+    public int CategoryId { get; set; }
+
+    // navigation property
+    private CategoryModel _categoryModel;
+
+    public CategoryModel CategoryModel
+    {
+        get { return _categoryModel; }
+        set { _categoryModel = value; OnPropertyChanged(nameof(CategoryModel)); }
+    }
+
 
     // Kolekcja historii nawyku
     public ICollection<ProgressHistoryModel> ProgressHistories { get; set; } = new List<ProgressHistoryModel>();

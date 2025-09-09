@@ -9,7 +9,10 @@ namespace WpfApp.Core.Constans
 {
     public class DbConnectionString
     {
+        #if DEBUG
         public const string connectionString = "C:\\Users\\Konrad\\Documents\\database\\app.db";
-        //public static readonly string connectionString = $"{Directory.GetCurrentDirectory()}\\app.db";
+        #else
+        public static readonly string connectionString = $"{Directory.GetCurrentDirectory()}\\app.db";
+        #endif
     }
 }
