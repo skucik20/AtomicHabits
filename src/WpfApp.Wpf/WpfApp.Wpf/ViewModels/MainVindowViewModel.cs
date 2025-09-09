@@ -1,4 +1,5 @@
-﻿using ModernWpf.Controls;
+﻿using MahApps.Metro.IconPacks;
+using ModernWpf.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Media3D;
 using WpfApp.Core.Interfaces;
 using WpfApp.Wpf.Helpers.Commands;
 using WpfApp.Wpf.ViewModels.Shared;
@@ -79,7 +81,6 @@ namespace WpfApp.Wpf.ViewModels
                     Glyph = "\uE9D9", // History
                     FontFamily = new FontFamily("Segoe MDL2 Assets")
                 },
-
                 Tag = "history" });
 
             CurrentView = _homeViewModel;

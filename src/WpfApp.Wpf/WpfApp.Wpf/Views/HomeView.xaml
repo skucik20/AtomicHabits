@@ -9,6 +9,7 @@
              xmlns:sharedVm="clr-namespace:WpfApp.Wpf.ViewModels.Shared"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:dd="urn:gong-wpf-dragdrop"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
              xmlns:ui="http://schemas.modernwpf.com/2019"
              d:DesignHeight="450" d:DesignWidth="800"
@@ -143,8 +144,18 @@
 
 
                                             <StackPanel Grid.Column="2" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                                <TextBlock Style="{StaticResource DescriptionStyleTextBlock}" Text="Streak" HorizontalAlignment="Center"/>
-                                                <TextBlock Style="{StaticResource HeaderStyle}" Text="{Binding Streak, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+                                                <!--<StackPanel Orientation="Horizontal">
+                                                    <iconPacks:PackIconMaterial Kind="Fire" Foreground="Orange"/>
+
+                                                    <TextBlock Style="{StaticResource DescriptionStyleTextBlock}" Text="Streak" HorizontalAlignment="Center" Margin="5 0"/>
+                                                    <iconPacks:PackIconMaterial Kind="Fire" Foreground="OrangeRed"/>
+
+                                                </StackPanel>-->
+                                                <Grid>
+
+                                                    <iconPacks:PackIconIonicons Kind="FlameMD" FontSize="60" Width="80" Height="50" Foreground="OrangeRed"/>
+                                                    <TextBlock Style="{StaticResource HeaderStyle}" Text="{Binding Streak, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 5 0 0"/>
+                                                </Grid>
                                             </StackPanel>
 
                    
