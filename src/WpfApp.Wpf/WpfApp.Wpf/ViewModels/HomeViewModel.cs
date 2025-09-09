@@ -49,7 +49,15 @@ namespace WpfApp.Wpf.ViewModels
         private readonly IProgressHistoryService _progressHistoryService;
         private readonly ICategoryService _categoryService;
 
-        public ObservableCollection<AtomicHabitModel> AtimicHabitsCollection { get; set; }
+        private ObservableCollection<AtomicHabitModel> _atimicHabitsCollection;
+
+
+        public ObservableCollection<AtomicHabitModel> AtimicHabitsCollection
+        {
+            get { return _atimicHabitsCollection; }
+            set { _atimicHabitsCollection = value; OnPropertyChanged(nameof(AtimicHabitsCollection)); }
+        }
+
         public ObservableCollection<CategoriesComboBox> CategoriesComboBoxCollection { get; set; } = new ObservableCollection<CategoriesComboBox>();
 
         #region Properties

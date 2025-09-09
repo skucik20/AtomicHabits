@@ -3,6 +3,8 @@ using ModernWpf.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Configuration;
 using System.Linq;
 using System.Text;
@@ -64,9 +66,12 @@ namespace WpfApp.Wpf.ViewModels
         {
 
             _homeViewModel = homeViewModel;
+            
             _progressHistoryViewModel = progressHistoryViewModel;
             _aboutViewModel = aboutViewModel;
             _settingsViewModel = settingsViewModel;
+
+            _homeViewModel.AtimicHabitsCollection.CollectionChanged += homeViewModelChanged;
 
             HamburgerMenuSelectionChangedCommand = new RelayCommand(HamburgerMenuSelectionChanged);
             ShowWidgetCommand = new RelayCommand(ShowWidget); 
@@ -103,6 +108,11 @@ namespace WpfApp.Wpf.ViewModels
                 .OfType<MainVindowView>()
                 .FirstOrDefault()
                 ?.Hide();
+        }
+        public async void homeViewModelChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            int i = 0;
+            await _progressHistoryViewModel.GenerateHabitHistoryComboBox();
         }
         public void HamburgerMenuSelectionChanged(object param)
         {

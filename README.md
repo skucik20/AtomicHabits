@@ -123,7 +123,6 @@ dotnet ef database update
 
 - [ ] If you click on X in HabitTitle TextBox in edit mode app will crash NULL
 - [x] Scroll does not work on list in Progrss history
-- [ ] If you delate habbit in combobox in progress history it still remains
 - [ ] Remove highliting of the list
 - [ ] If you change list arreangement it restes after restart
 
@@ -158,6 +157,7 @@ dotnet ef database update
 - [x] Stylize widget
 - [x] Add icons
 - [x] Unable to add empty or duplicated habit title
+- [x] If you delate habbit in combobox in progress history it still remains
 
 ### Tests
 - [x] Write unit tests for AtomicHabitServiceTests

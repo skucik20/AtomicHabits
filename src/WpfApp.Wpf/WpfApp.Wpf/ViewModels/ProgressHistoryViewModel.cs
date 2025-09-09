@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using WpfApp.Core.Interfaces;
 using WpfApp.Core.Models;
 using WpfApp.Core.Models.Shared;
@@ -16,9 +17,20 @@ namespace WpfApp.Wpf.ViewModels
         private HabitHistorySelectionComboBoxModel _seledtedHabitHistorySelectionComboBox;
         private ObservableCollection<ProgressHistoryModel> _progressCollection;
         public ObservableCollection<HabitHistorySelectionComboBoxModel> HabitHistorySelectionComboBox { get; set; }
-        public ObservableCollection<AtomicHabitModel> AtimicHabitsCollection { get; set; }
-        
-        public Dictionary<int, ObservableCollection<ProgressHistoryModel>> ProgressByHabit { get; set; }
+
+        private ObservableCollection<AtomicHabitModel> _atimicHabitsCollection;
+        public ObservableCollection<AtomicHabitModel> AtimicHabitsCollection
+        {
+            get { return _atimicHabitsCollection; }
+            set { _atimicHabitsCollection = value; OnPropertyChanged(nameof(AtimicHabitsCollection)); }
+        }
+
+        private Dictionary<int, ObservableCollection<ProgressHistoryModel>> _progressByHabit;
+        public Dictionary<int, ObservableCollection<ProgressHistoryModel>> ProgressByHabit
+        {
+            get { return _progressByHabit; }
+            set { _progressByHabit = value; OnPropertyChanged(nameof(ProgressByHabit)); }
+        }
 
 
         public HabitHistorySelectionComboBoxModel SeledtedHabitHistorySelectionComboBoxoperty
@@ -51,7 +63,18 @@ namespace WpfApp.Wpf.ViewModels
 
             HabitHistorySelectionComboBox = new ObservableCollection<HabitHistorySelectionComboBoxModel>();
             SeledtedHabitHistorySelectionComboBoxoperty = new HabitHistorySelectionComboBoxModel();
-            foreach(var item in ProgressByHabit)
+
+            _ = GenerateHabitHistoryComboBox();
+
+        }
+
+        public async Task GenerateHabitHistoryComboBox()
+        {
+            await LoadAtimicHabitsAsync();
+            await LoadProgressByHabitsAsync();
+
+            HabitHistorySelectionComboBox.Clear();
+            foreach (var item in ProgressByHabit)
             {
                 HabitHistorySelectionComboBox.Add(new HabitHistorySelectionComboBoxModel
                 {
@@ -61,7 +84,6 @@ namespace WpfApp.Wpf.ViewModels
                     SelectedDates = ExtractDateFromHabitHistoryCollection(),
                 });
             }
-
         }
 
         private ObservableCollection<DateTime> ExtractDateFromHabitHistoryCollection()
@@ -83,8 +105,8 @@ namespace WpfApp.Wpf.ViewModels
 
         public async Task LoadProgressByHabitsAsync()
         {
-
-            foreach(var atomicHabit in AtimicHabitsCollection)
+            ProgressByHabit.Clear();
+            foreach (var atomicHabit in AtimicHabitsCollection)
             {
                 IEnumerable<ProgressHistoryModel> progressEnumerable = await _progressHistoryService.GetProgressByHabitIdAsync(atomicHabit.Id);
                 var progressCollection = new ObservableCollection<ProgressHistoryModel>(progressEnumerable);
