@@ -25,6 +25,8 @@ namespace WpfApp.Wpf.Bootstrapper
 
             var dailyResetService = ServiceProvider.GetRequiredService<IDailyResetService>();
             dailyResetService.Start();
+            var categoryService = ServiceProvider.GetRequiredService<ICategoryService>();
+            categoryService.AddDefaultCatedories();
 
             // Run main window
             var mainWindow = ServiceProvider.GetRequiredService<MainVindowView>();
@@ -44,6 +46,7 @@ namespace WpfApp.Wpf.Bootstrapper
             services.AddScoped<IAtomicHabitService, AtomicHabitService>();
             services.AddSingleton<IDailyResetService, DailyResetService>();
             services.AddSingleton<IProgressHistoryService, ProgressHistoryService>();
+            services.AddSingleton<ICategoryService, CategoryService>();
 
             // ViewModels
             services.AddTransient<HomeViewModel>();

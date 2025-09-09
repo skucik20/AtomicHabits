@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using WpfApp.Core.Interfaces;
 using WpfApp.Core.Models;
+using WpfApp.Core.Models.Shared;
 using WpfApp.Core.Services;
 using WpfApp.Wpf.Helpers;
 using WpfApp.Wpf.Helpers.Commands;
@@ -22,13 +23,21 @@ using WpfApp.Wpf.Views;
 
 namespace WpfApp.Wpf.ViewModels
 {
+
+    public class CategoriesComboBox : BaseComboBoxModel
+    {
+        public CategoryModel Category { get; set; }
+    }
     public class HomeViewModel : BaseViewModel
     {
+        private CategoriesComboBox _selectedCategoriesComboBoxItem;
         private AtomicHabitModel _currentAtomicHabit;
         private string _habitTitle = string.Empty;
         private string _habitDescription = string.Empty;
         private bool _isHabitChecked;
         private bool _isHabitListEmpty;
+
+        public string MyProperty { get; set; } = "#388E3C";
         public ICommand AddHabitCommand { get; set; }
         public ICommand ClearHabitCommand { get; set; }
         public ICommand HabitDelateCommand { get; }
@@ -39,11 +48,19 @@ namespace WpfApp.Wpf.ViewModels
 
         private readonly IAtomicHabitService _atomicHabitService;
         private readonly IProgressHistoryService _progressHistoryService;
+        private readonly ICategoryService _categoryService;
 
         public ObservableCollection<AtomicHabitModel> AtimicHabitsCollection { get; set; }
+        public ObservableCollection<CategoriesComboBox> CategoriesComboBoxCollection { get; set; } = new ObservableCollection<CategoriesComboBox>();
 
         #region Properties
-        
+
+        public CategoriesComboBox SelectedCategoriesComboBoxItem
+        {
+            get { return _selectedCategoriesComboBoxItem; }
+            set { _selectedCategoriesComboBoxItem = value; OnPropertyChanged(nameof(SelectedCategoriesComboBoxItem)); }
+        }
+
         public AtomicHabitModel CurrentAtomicHabit
         {
             get { return _currentAtomicHabit; }
@@ -78,13 +95,14 @@ namespace WpfApp.Wpf.ViewModels
         private DispatcherTimer _timer;
 
 
-        public HomeViewModel(IAtomicHabitService atomicHabitService, IProgressHistoryService progressHistoryService)
+        public HomeViewModel(IAtomicHabitService atomicHabitService, IProgressHistoryService progressHistoryService, ICategoryService categoryService)
         {
 
             AtimicHabitsCollection = new ObservableCollection<AtomicHabitModel>();
             
             _atomicHabitService = atomicHabitService;
             _progressHistoryService = progressHistoryService;
+            _categoryService = categoryService;
 
             AddHabitCommand = new RelayCommandAsync(AddHabit);
             ClearHabitCommand = new RelayCommand(ClearHabit);
@@ -97,6 +115,8 @@ namespace WpfApp.Wpf.ViewModels
 
             _ = _atomicHabitService.HasTodayAtomicHabitChecked();
             _ = LoadData();
+            _ = LoadCategoryCombobox();
+            SelectedCategoriesComboBoxItem = CategoriesComboBoxCollection[0];
 
             widgetHabtisChanger();
             IsAtomicHabitsListEmpty();
@@ -220,13 +240,36 @@ namespace WpfApp.Wpf.ViewModels
 
         public async Task AddHabit(object parametr)
         {
-            await _atomicHabitService.AddAsync(new AtomicHabitModel { Title = HabitTitle, Description = HabitDescription });
+            await _atomicHabitService.AddAsync(new AtomicHabitModel
+            {
+                Title = HabitTitle,
+                Description = HabitDescription,
+                CategoryId = SelectedCategoriesComboBoxItem.Id,
+                CategoryModel = SelectedCategoriesComboBoxItem.Category
+
+            });
             _ = LoadData();
             var toast = new ToastWindow("Success!", "Your operation completed successfully.");
             toast.Show();
             IsAtomicHabitsListEmpty();
         }
 
+        private async Task LoadCategoryCombobox()
+        {
+            var categories = await _categoryService.GetAllAsync();
+            CategoriesComboBoxCollection.Clear();
+            foreach (var category in categories)
+            {
+                CategoriesComboBoxCollection.Add(
+                    new CategoriesComboBox
+                    {
+                        Id = category.Id,
+                        Content = category.CategoryName,
+                        Category = category
+                    }
+                );
+            }
+        }
         private async Task LoadData()
         {
             var atomicHabits = await _atomicHabitService.GetAllAsync();
