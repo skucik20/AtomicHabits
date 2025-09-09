@@ -14,7 +14,7 @@
         
         ui:TitleBar.ExtendViewIntoTitleBar="True"
         ResizeMode="NoResize"
-        Height="650" Width="820"
+        Height="650" Width="820" 
         >
     <!--ui:TitleBar.Style="{DynamicResource AppTitleBarStyle}"-->
     <!--ui:TitleBar.ButtonStyle="{DynamicResource AppTitleBarButtonStyle}"

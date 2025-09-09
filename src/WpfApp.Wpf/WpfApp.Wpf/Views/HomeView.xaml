@@ -5,12 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp.Wpf.Views"
              xmlns:cmd="clr-namespace:WpfApp.Wpf.Helpers.Commands"
+             xmlns:conv="clr-namespace:WpfApp.Wpf.Helpers.Converters"
              xmlns:sharedVm="clr-namespace:WpfApp.Wpf.ViewModels.Shared"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:dd="urn:gong-wpf-dragdrop"
              mc:Ignorable="d" 
              xmlns:ui="http://schemas.modernwpf.com/2019"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             >
+    <UserControl.Resources>
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisDefault" />
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisInverted" Invert="True" />
+    </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
             <Grid>
@@ -54,7 +60,13 @@
                     </StackPanel>
                 </Expander>
                 <!--Background="{DynamicResource SystemControlDisabledBaseLowBrush}"-->
-                <Border Grid.Column="1" Grid.Row="3" Background="Black" CornerRadius="10" BorderBrush="White" BorderThickness="1" Padding="0 10">
+                <StackPanel Grid.Column="1" Grid.Row="3" Background="Transparent"
+                        Visibility="{Binding IsHabitListEmpty, Converter={StaticResource BoolToVisInverted}}">
+                    <Image Source="\Resources\Images\rocket.png" Width="300" Opacity="0.6"/>
+                    <TextBlock Text="No habits" HorizontalAlignment="Center" FontSize="24" FontWeight="Light" Margin="0 -50 0 0"/>
+                </StackPanel>
+                <Border Grid.Column="1" Grid.Row="3" Background="Black" CornerRadius="10" BorderBrush="White" BorderThickness="1" Padding="0 10" 
+                        Visibility="{Binding IsHabitListEmpty, Converter={StaticResource BoolToVisDefault}}">
                     <ListView x:Name="HabitsListView" ItemsSource="{Binding AtimicHabitsCollection}" Focusable="False"
                              dd:DragDrop.IsDragSource="True"
                              dd:DragDrop.IsDropTarget="True"
@@ -62,14 +74,14 @@
                              dd:DragDrop.DropHandler="{Binding}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderThickness="1" CornerRadius="2" BorderBrush="White" Margin="0 5" Background="Orange">
+                                <Border BorderThickness="1" CornerRadius="2" BorderBrush="White" Margin="0 5">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="200" />
                                             <ColumnDefinition Width="auto" />
                                             <ColumnDefinition Width="100" />
                                             <ColumnDefinition Width="150" />
-                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="10" />
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
                                             <RowDefinition/>
@@ -77,23 +89,19 @@
                                         </Grid.RowDefinitions>
                                         <sharedVm:OnFocusTextSelectedTextBox Style="{StaticResource DefaultTextBoxStyle}"
                                                                              Margin="5"
-                        Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" 
+                                                                             Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" 
                                                                              IsReadOnly="{Binding IsTextBlockReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
 
 
                                         <Expander Grid.Row="1" Header="Details" Margin="5">
-                                            <!--<Border  BorderBrush="Black" BorderThickness="1" CornerRadius="5" Padding="5">-->
-                                                <sharedVm:OnFocusTextSelectedTextBox Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" BorderThickness="0"
-               Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
-               IsReadOnly="{Binding IsTextBlockReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
-                                            <!--</Border>-->
+                                            <sharedVm:OnFocusTextSelectedTextBox Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" BorderThickness="0"
+                   Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
+                   IsReadOnly="{Binding IsTextBlockReadOnly, UpdateSourceTrigger=PropertyChanged}"/>            
                                         </Expander>
 
 
                                         <TextBlock Text="Status" Grid.Column="1"/>
                                         <CheckBox  Grid.Row="1" Grid.Column="1" 
-                                                   VerticalAlignment="Center"
-                                                   HorizontalAlignment="Center"
                                                    IsChecked="{Binding IsHabitDone, UpdateSourceTrigger=PropertyChanged}"/>
 
                                         <TextBlock Text="Streak" Grid.Column="2"/>

@@ -6,14 +6,21 @@
         xmlns:local="clr-namespace:WpfApp.Wpf.Views"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="True"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        
         Height="100" Width="450"
         Title="Atomic habbits"
-        ResizeMode="NoResize"
+        
         WindowStyle="ToolWindow"
         Topmost="True"
         >
+ 
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding ShowMainWindowCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <!--
     WindowStyle="ToolWindow"
     Title="Widget"         AllowsTransparency="True"
@@ -21,7 +28,10 @@
     <Grid>
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="Habit:" VerticalAlignment="Center" Style="{StaticResource HeaderTextBoxStyle}" />
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left"  Text="{Binding CurrentAtomicHabit.Title, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource HeaderTextBoxStyle}"/>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" 
+                       TextWrapping="Wrap"
+                       Text="{Binding CurrentAtomicHabit.Title, UpdateSourceTrigger=PropertyChanged}" 
+                       Style="{StaticResource HeaderTextBoxStyle}"/>
             <CheckBox IsChecked="{Binding CurrentAtomicHabit.IsHabitDone, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content=">" Command="{Binding ShowMainWindowCommand}" Width="30"/>
         </StackPanel>

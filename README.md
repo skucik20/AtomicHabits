@@ -104,16 +104,23 @@ dotnet ef database update
 ## Backlog 📌
 
 - [ ] Logic for ProgresHistory -> some charts etc
-- [ ] Notyfications
+- [ ] Settings
+	- [ ] Notyfications
+	- [ ] Open with PC start
 - [ ] Remove highliting of the list
 - [ ] Make toast in MVVM
 - [ ] Convert animations to MVVM
 - [ ] Test to creating progressHistory on startapp -> added new funcionality to it so test needs to be modified
 - [ ] Unable to click on date button in calendar -> now there is workeround with border
-
 - [ ] Fix problem with close button in widget - sholud exit whole app
 - [ ] Unable to add empty or repeted habit title
 - [ ] Add picture if habbit list is empty
+- [ ] Under left button delate-edit in list
+- [ ] Until you select 
+- [ ] Add tabs witch categories -> if theere is a lot of tasks it will be easier for user to navigate
+- [ ] Add icons
+- [ ] Add win habits
+- [ ] Stylize widget 
 
 ## Todo ⏳
 
@@ -123,7 +130,7 @@ dotnet ef database update
 ## Bugs
 
 - [ ] If you click on X in HabitTitle TextBox in edit mode app will crash NULL
-- [ ] Scroll does not work on list in Progrss history
+- [x] Scroll does not work on list in Progrss history
 - [ ] If you delate habbit in combobox in progress history it still remains
 
 ## Completed ✅ 

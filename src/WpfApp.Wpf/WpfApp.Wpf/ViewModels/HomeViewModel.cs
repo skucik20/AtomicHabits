@@ -24,15 +24,17 @@ namespace WpfApp.Wpf.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
+        private AtomicHabitModel _currentAtomicHabit;
         private string _habitTitle = string.Empty;
         private string _habitDescription = string.Empty;
         private bool _isHabitChecked;
+        private bool _isHabitListEmpty;
         public ICommand AddHabitCommand { get; set; }
         public ICommand ClearHabitCommand { get; set; }
         public ICommand HabitDelateCommand { get; }
         public ICommand HabitEditCommand { get; set; }
-
         public ICommand ShowMainWindowCommand { get; set; }
+
 
 
         private readonly IAtomicHabitService _atomicHabitService;
@@ -41,8 +43,7 @@ namespace WpfApp.Wpf.ViewModels
         public ObservableCollection<AtomicHabitModel> AtimicHabitsCollection { get; set; }
 
         #region Properties
-        private AtomicHabitModel _currentAtomicHabit;
-
+        
         public AtomicHabitModel CurrentAtomicHabit
         {
             get { return _currentAtomicHabit; }
@@ -64,6 +65,11 @@ namespace WpfApp.Wpf.ViewModels
         {
             get { return _isHabitChecked; }
             set { _isHabitChecked = value; OnPropertyChanged(nameof(IsHabitChecked)); }
+        }
+        public bool IsHabitListEmpty
+        {
+            get { return _isHabitListEmpty; }
+            set { _isHabitListEmpty = value; OnPropertyChanged(nameof(IsHabitListEmpty)); }
         }
         #endregion
 
@@ -92,6 +98,24 @@ namespace WpfApp.Wpf.ViewModels
             _ = _atomicHabitService.HasTodayAtomicHabitChecked();
             _ = LoadData();
 
+            widgetHabtisChanger();
+            IsAtomicHabitsListEmpty();
+        }
+
+        private void IsAtomicHabitsListEmpty()
+        {
+            if(AtimicHabitsCollection.Count() == 0)
+            {
+                IsHabitListEmpty = false;
+            }
+            else
+            {
+                IsHabitListEmpty = true;
+            }
+        }
+
+        private void widgetHabtisChanger()
+        {
             if (AtimicHabitsCollection.Count > 0)
                 CurrentAtomicHabit = AtimicHabitsCollection[0];
 
@@ -130,11 +154,14 @@ namespace WpfApp.Wpf.ViewModels
         {
 
             // close widget
-            Application.Current.Windows
+            try {
+                Application.Current.Windows
                 .OfType<WidgetWindowView>()
                 .FirstOrDefault()
                 ?.Close();
-
+            }
+            catch { }
+            
 
             // unhide main window
             //TODO is main window Application.Current.MainWindow
@@ -188,14 +215,16 @@ namespace WpfApp.Wpf.ViewModels
                 _atomicHabitService.DeleteAsync(habit.Id);
                 _ = LoadData();
             }
+            IsAtomicHabitsListEmpty();
         }
 
         public async Task AddHabit(object parametr)
         {
             await _atomicHabitService.AddAsync(new AtomicHabitModel { Title = HabitTitle, Description = HabitDescription });
             _ = LoadData();
-            var toast = new ToastWindow("Sukces!", "Twoja operacja zakończyła się pomyślnie.");
+            var toast = new ToastWindow("Success!", "Your operation completed successfully.");
             toast.Show();
+            IsAtomicHabitsListEmpty();
         }
 
         private async Task LoadData()
