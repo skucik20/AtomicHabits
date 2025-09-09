@@ -41,17 +41,15 @@
 
         <local:BubblesAnimationView Grid.RowSpan="2" Grid.ColumnSpan="5"/>
 
-        <Border Background="{Binding CurrentAtomicHabit.CategoryModel.CategoryColor}"  Padding="10 0 0 0" Height="10" Grid.ColumnSpan="5" Opacity="0.8">
+        <Border Background="{Binding CurrentAtomicHabit.CategoryModel.CategoryColor}" Padding="10 0 0 0" Height="10" Grid.ColumnSpan="5" Opacity="0.8">
             <!--<TextBlock Text="{Binding CurrentAtomicHabit.CategoryModel.CategoryName}" 
                        FontWeight="Light"
                        VerticalAlignment="Center"/>-->
         </Border>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-            <TextBlock Text="Title: " VerticalAlignment="Center" FontWeight="Light"/>
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" 
-                       TextWrapping="Wrap" Width="250"
-                       FontWeight="Bold"
-                       FontSize="16"
+            <TextBlock Text="Title: " VerticalAlignment="Center" Style="{StaticResource DescriptionStyleTextBlock}"/>
+            <TextBlock Width="250"
+                       Style="{StaticResource TitleStyleTextBlock}"
                        Text="{Binding CurrentAtomicHabit.Title, UpdateSourceTrigger=PropertyChanged}"/>
             
             

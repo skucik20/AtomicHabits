@@ -119,6 +119,7 @@ dotnet ef database update
 - [ ] Unable to add empty or repeted habit title
 - [ ] Add icons
 - [ ] Add win habits
+- [ ] Edit history, restore streak
 
 ## Bugs
 

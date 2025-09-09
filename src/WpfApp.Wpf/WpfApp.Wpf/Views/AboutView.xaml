@@ -6,19 +6,7 @@
              xmlns:local="clr-namespace:WpfApp.Wpf.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <!-- Resources for consistent spacing and typography -->
     <UserControl.Resources>
-        <Thickness x:Key="PagePadding">24</Thickness>
-        <Style x:Key="HeaderText" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="22" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="TextWrapping" Value="Wrap" />
-        </Style>
-        <Style x:Key="BodyText" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="13" />
-            <Setter Property="Foreground" Value="#333333" />
-            <Setter Property="TextWrapping" Value="Wrap" />
-        </Style>
         <Style x:Key="LinkButton" TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Transparent" />
@@ -46,8 +34,8 @@
                     <Image Stretch="Uniform" ToolTip="Atomic Habits logo" />
                 </Border>
 
-                <TextBlock Style="{StaticResource HeaderText}" Text="Atomic Habits" Margin="0,12,0,2" HorizontalAlignment="Center"/>
-                <TextBlock Style="{StaticResource BodyText}"
+                <TextBlock Style="{StaticResource  HeaderStyle}" Text="Atomic Habits" Margin="0,12,0,2" HorizontalAlignment="Center"/>
+                <TextBlock Style="{StaticResource DescriptionStyleTextBlock}"
                            Text="Build small habits, achieve big results"
                            FontStyle="Italic" HorizontalAlignment="Center"/>
 
@@ -56,29 +44,29 @@
 
             <!-- About Text -->
             <StackPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Orientation="Vertical" VerticalAlignment="Top">
-                <TextBlock Style="{StaticResource HeaderText}">About this app</TextBlock>
-                <TextBlock Style="{StaticResource BodyText}"
+                <TextBlock Style="{StaticResource HeaderStyle}">About this app</TextBlock>
+                <TextBlock Style="{StaticResource DescriptionStyleTextBlock}"
                            Text="Atomic Habits is a simple, everyday habit tracker and coach designed to help you form tiny, consistent changes that compound into significant progress over time. The app emphasizes habit stacking, environment design, and iterative improvement so you can turn small actions into long-lasting routines."
                            Margin="0,6,0,0"/>
 
-                <TextBlock Style="{StaticResource HeaderText}" Text="Inspired by the book" Margin="0,18,0,4"/>
-                <TextBlock Style="{StaticResource BodyText}"
+                <TextBlock Style="{StaticResource HeaderStyle}" Text="Inspired by the book" Margin="0,18,0,4"/>
+                <TextBlock Style="{StaticResource DescriptionStyleTextBlock}"
                            Text="This application is inspired by *Atomic Habits* by James Clear. While the app does not replace the original book, it implements many practical techniques described there — such as focusing on systems over goals, making habits obvious and attractive, and reducing friction for desired behaviors."
                            Margin="0,6,0,0"/>
 
 
-                <TextBlock Style="{StaticResource BodyText}" 
+                <TextBlock Style="{StaticResource DescriptionStyleTextBlock}" 
                            Text="If you'd like to learn more about the ideas that shaped this app, check out the book or visit the author's site."
                            Margin="0,12,0,0"/>
 
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                     <Button Style="{StaticResource LinkButton}" Command="{Binding OpenAuthorSiteCommand}">
-                        <TextBlock TextDecorations="Underline">Author's website</TextBlock>
+                        <TextBlock TextDecorations="Underline" Text="Author's website"/>
                     </Button>
                 </StackPanel>
 
 
-                <TextBlock Style="{StaticResource BodyText}" Margin="0,10,0,0"
+                <TextBlock Style="{StaticResource DescriptionStyleTextBlock}" Margin="0,10,0,0"
                            Text="This app is an independent project inspired by the ideas in the original book. It is not affiliated with or endorsed by the author or publisher. All trademarks and copyrights belong to their respective owners."/>
 
             </StackPanel>
