@@ -16,6 +16,7 @@
     <UserControl.Resources>
         <conv:BoolToVisibilityConverter x:Key="BoolToVisDefault" />
         <conv:BoolToVisibilityConverter x:Key="BoolToVisInverted" Invert="True" />
+        <conv:StringToBrushConverter x:Key="StringToBrushConverter"/>
     </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
@@ -44,7 +45,16 @@
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Margin="5">
                             <TextBlock Grid.Column="0" Grid.Row="0" Text="Title"/>
-                            <sharedVm:OnFocusTextSelectedTextBox Style="{StaticResource DefaultTextBoxStyle}" Text="{Binding HabitTitle, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+                            <sharedVm:OnFocusTextSelectedTextBox x:Name="CreateHabitTitleTB" Style="{StaticResource DefaultTextBoxStyle}" Text="{Binding HabitTitle, UpdateSourceTrigger=PropertyChanged}" 
+                                                                 Width="200"/>
+
+                            <ComboBox ItemsSource="{Binding CategoriesComboBoxCollection}" 
+                                      SelectedItem="{Binding SelectedCategoriesComboBoxItem, UpdateSourceTrigger=PropertyChanged}"
+                                      DisplayMemberPath="Content"
+                                      Width="{Binding ElementName=CreateHabitTitleTB, Path=ActualWidth}"/>
+
+
+
                             <Grid Margin="5 20 5 5">
                                 <Button Content="Add" Command="{Binding AddHabitCommand}" HorizontalAlignment="Left"/>
                                 <Button Content="Clear" Command="{Binding ClearHabitCommand}" HorizontalAlignment="Right"/>
@@ -65,7 +75,9 @@
                     <Image Source="\Resources\Images\rocket.png" Width="300" Opacity="0.6"/>
                     <TextBlock Text="No habits" HorizontalAlignment="Center" FontSize="24" FontWeight="Light" Margin="0 -50 0 0"/>
                 </StackPanel>
-                <Border Grid.Column="1" Grid.Row="3" Background="Black" CornerRadius="10" BorderBrush="White" BorderThickness="1" Padding="0 10" 
+                <Border Grid.Column="1" Grid.Row="3" 
+                        Background="Transparent"
+                                         CornerRadius="10" BorderBrush="Transparent" BorderThickness="1" Padding="0 10" 
                         Visibility="{Binding IsHabitListEmpty, Converter={StaticResource BoolToVisDefault}}">
                     <ListView x:Name="HabitsListView" ItemsSource="{Binding AtimicHabitsCollection}" Focusable="False"
                              dd:DragDrop.IsDragSource="True"
@@ -74,49 +86,80 @@
                              dd:DragDrop.DropHandler="{Binding}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderThickness="1" CornerRadius="2" BorderBrush="White" Margin="0 5">
+                                <Border BorderThickness="1" CornerRadius="10" BorderBrush="White" Margin="0 5" 
+                                        
+                                        Opacity="0.9">
                                     <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="200" />
-                                            <ColumnDefinition Width="auto" />
-                                            <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="150" />
-                                            <ColumnDefinition Width="10" />
-                                        </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
                                             <RowDefinition/>
-                                            <RowDefinition />
+                                            <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <sharedVm:OnFocusTextSelectedTextBox Style="{StaticResource DefaultTextBoxStyle}"
-                                                                             Margin="5"
-                                                                             Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" 
-                                                                             IsReadOnly="{Binding IsTextBlockReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                        <Border Background="{Binding Path=CategoryModel.CategoryColor}" Padding="5" CornerRadius="10 10 0 0">
+                                            <Grid>
+                                                <TextBlock Text="{Binding Path=CategoryModel.CategoryName}" FontWeight="Light"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <Grid Grid.Row="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="200" />
+                                                <ColumnDefinition Width="100" />
+                                                <ColumnDefinition Width="100" />
+                                                <ColumnDefinition Width="150" />
+                                                <ColumnDefinition Width="10" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
 
 
-                                        <Expander Grid.Row="1" Header="Details" Margin="5">
-                                            <sharedVm:OnFocusTextSelectedTextBox Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" BorderThickness="0"
-                   Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
-                   IsReadOnly="{Binding IsTextBlockReadOnly, UpdateSourceTrigger=PropertyChanged}"/>            
-                                        </Expander>
+
+                                            <sharedVm:OnFocusTextSelectedTextBox Style="{StaticResource DefaultTextBoxStyle}"
+                                                                                 Margin="5"
+                                                                                 FontWeight="Bold"
+                                                                                 FontSize="16"
+                                                                                 Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" 
+                                                                                 IsReadOnly="{Binding IsTextBlockReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
 
 
-                                        <TextBlock Text="Status" Grid.Column="1"/>
-                                        <CheckBox  Grid.Row="1" Grid.Column="1" 
-                                                   IsChecked="{Binding IsHabitDone, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <Expander Grid.Row="1" Header="Details" Margin="5" FontWeight="Light">
+                                                <sharedVm:OnFocusTextSelectedTextBox Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" BorderThickness="0"
+                                                                                     FontWeight="Normal"
+                       Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
+                       IsReadOnly="{Binding IsTextBlockReadOnly, UpdateSourceTrigger=PropertyChanged}"/>
+                                            </Expander>
 
-                                        <TextBlock Text="Streak" Grid.Column="2"/>
-                                        <TextBlock Text="{Binding Streak, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"/>
 
-                                        <ui:CommandBar Height="35" Grid.Column="3" Grid.RowSpan="3" VerticalAlignment="Center">
-                                            <ui:AppBarButton Icon="Delete" Label="Delete" 
-                                                             Command="{Binding DataContext.HabitDelateCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
-                                                             CommandParameter="{Binding}"/>
+                                            <StackPanel Grid.Column="1" Grid.RowSpan="2" >
+                                                <TextBlock Text="Status" HorizontalAlignment="Center" Margin="0 5 0 0"/>
+                                                <CheckBox Margin="35 0 0 10" Content=""
+                                                      IsChecked="{Binding IsHabitDone, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.RenderTransform>
+                                                        <ScaleTransform ScaleX="1.4" ScaleY="1.4"/>
+                                                    </CheckBox.RenderTransform>
+                                                </CheckBox>
+                                            </StackPanel>
 
-                                            <ui:AppBarToggleButton Icon="Edit" Label="Edit"
-                                                                   IsChecked="{Binding IsEditHabitModeOn,UpdateSourceTrigger=PropertyChanged}"
-                                                                   Command="{Binding DataContext.HabitEditCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
-                                                                   CommandParameter="{Binding}"/>
-                                        </ui:CommandBar>
+
+                                            <StackPanel Grid.Column="2" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                                <TextBlock Text="Streak" HorizontalAlignment="Center"/>
+                                                <TextBlock Style="{StaticResource HeaderTextBoxStyle}" Text="{Binding Streak, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+                                            </StackPanel>
+
+                   
+                                            <ui:CommandBar Height="35" Grid.Column="3" Grid.RowSpan="3" VerticalAlignment="Center">
+                                                <ui:AppBarButton Icon="Delete" Label="Delete" 
+                                                                 Command="{Binding DataContext.HabitDelateCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                                 CommandParameter="{Binding}"/>
+
+                                                <ui:AppBarToggleButton Icon="Edit" Label="Edit"
+                                                                       IsChecked="{Binding IsEditHabitModeOn,UpdateSourceTrigger=PropertyChanged}"
+                                                                       Command="{Binding DataContext.HabitEditCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                                       CommandParameter="{Binding}"/>
+                                            </ui:CommandBar>
+                                        </Grid>
                                     </Grid>
                                 </Border>
                                 
