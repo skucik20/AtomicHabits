@@ -11,7 +11,7 @@ namespace WpfApp.Core.Constans
     {
         #if DEBUG
         public const string connectionString = "C:\\Users\\Konrad\\Documents\\database\\app.db";
-        #else
+        #elif RELEASE
         public static readonly string connectionString = $"{Directory.GetCurrentDirectory()}\\app.db";
         #endif
     }
