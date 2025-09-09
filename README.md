@@ -109,15 +109,13 @@ dotnet ef database update
     - [ ] Categories customize
 - [ ] Make toast in MVVM
 - [ ] Convert animations to MVVM
-- [ ] Test to creating progressHistory on startapp -> added new funcionality to it so test needs to be modified
 - [ ] Unable to click on date button in calendar -> now there is workeround with border
 - [ ] Under left button delate-edit in list
 - [ ] Add tabs witch categories -> if theere is a lot of tasks it will be easier for user to navigate
 
 
 ## Todo ⏳
-- [ ] Unable to add empty or repeted habit title
-- [ ] Add icons
+
 - [ ] Add win habits
 - [ ] Edit history, restore streak
 
@@ -158,6 +156,8 @@ dotnet ef database update
 - [x] Fix problem with close button in widget - sholud exit whole app
 - [x] Add picture if habbit list is empty
 - [x] Stylize widget
+- [x] Add icons
+- [x] Unable to add empty or duplicated habit title
 
 ### Tests
 - [x] Write unit tests for AtomicHabitServiceTests
