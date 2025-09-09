@@ -103,35 +103,31 @@ dotnet ef database update
 
 ## Backlog 📌
 
-- [ ] Logic for ProgresHistory -> some charts etc
 - [ ] Settings
 	- [ ] Notyfications
 	- [ ] Open with PC start
-- [ ] Remove highliting of the list
+    - [ ] Categories customize
 - [ ] Make toast in MVVM
 - [ ] Convert animations to MVVM
 - [ ] Test to creating progressHistory on startapp -> added new funcionality to it so test needs to be modified
 - [ ] Unable to click on date button in calendar -> now there is workeround with border
-- [ ] Fix problem with close button in widget - sholud exit whole app
-- [ ] Unable to add empty or repeted habit title
-- [ ] Add picture if habbit list is empty
 - [ ] Under left button delate-edit in list
-- [ ] Until you select 
 - [ ] Add tabs witch categories -> if theere is a lot of tasks it will be easier for user to navigate
-- [ ] Add icons
-- [ ] Add win habits
-- [ ] Stylize widget 
+
 
 ## Todo ⏳
-
-- [ ] Add cetegories to habits
-
+- [ ] Unable to add empty or repeted habit title
+- [ ] Add icons
+- [ ] Add win habits
+- [ ] Stylize widget
 
 ## Bugs
 
 - [ ] If you click on X in HabitTitle TextBox in edit mode app will crash NULL
 - [x] Scroll does not work on list in Progrss history
 - [ ] If you delate habbit in combobox in progress history it still remains
+- [ ] Remove highliting of the list
+- [ ] If you change list arreangement it restes after restart
 
 ## Completed ✅ 
 - [x] Create GitHub repository
@@ -156,9 +152,15 @@ dotnet ef database update
 - [x] Create widget 
 - [x] Update about page
 - [x] Ask user if he is sure to delate habbit
+- [x] Table in db based on the CategoryModel
+- [x] Add cetegories to habits
+- [x] Logic for ProgresHistory -> some charts etc
+- [x] Fix problem with close button in widget - sholud exit whole app
+- [x] Add picture if habbit list is empty
 
 ### Tests
 - [x] Write unit tests for AtomicHabitServiceTests
 - [x] Write unit tests for DailyResetServiceTests
 - [x] Write unit tests for ProgressHistoryServiceTests
+- [ ] Write unit tests for CategoriesServiceTests
 
