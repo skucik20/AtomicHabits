@@ -39,14 +39,14 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <local:BubblesAnimationView Grid.RowSpan="2" Grid.ColumnSpan="4"/>
+        <local:BubblesAnimationView Grid.RowSpan="2" Grid.ColumnSpan="5"/>
 
-        <Border Background="{Binding CurrentAtomicHabit.CategoryModel.CategoryColor}"  Padding="10 0 0 0" Height="10" Grid.ColumnSpan="4" Opacity="0.8">
+        <Border Background="{Binding CurrentAtomicHabit.CategoryModel.CategoryColor}"  Padding="10 0 0 0" Height="10" Grid.ColumnSpan="5" Opacity="0.8">
             <!--<TextBlock Text="{Binding CurrentAtomicHabit.CategoryModel.CategoryName}" 
                        FontWeight="Light"
                        VerticalAlignment="Center"/>-->
         </Border>
-        <StackPanel Orientation="Horizontal" Grid.Row="1">
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
             <TextBlock Text="Title: " VerticalAlignment="Center" FontWeight="Light"/>
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" 
                        TextWrapping="Wrap" Width="250"
@@ -57,12 +57,12 @@
             
         </StackPanel>
 
-        <CheckBox Grid.Column="1" Grid.RowSpan="2" IsChecked="{Binding CurrentAtomicHabit.IsHabitDone, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 0 10">
+        <CheckBox Grid.Column="2" Grid.RowSpan="2" IsChecked="{Binding CurrentAtomicHabit.IsHabitDone, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 0 10">
             <CheckBox.RenderTransform>
                 <ScaleTransform ScaleX="1.4" ScaleY="1.4"/>
             </CheckBox.RenderTransform>
         </CheckBox>
 
-        <Button Content=">" Command="{Binding ShowMainWindowCommand}" Width="30" Grid.Column="2" Grid.RowSpan="2" Margin="10"/>
+        <Button Content=">" Command="{Binding ShowMainWindowCommand}" Width="30" Grid.Column="3" Grid.RowSpan="2" Margin="10"/>
     </Grid>
 </Window>

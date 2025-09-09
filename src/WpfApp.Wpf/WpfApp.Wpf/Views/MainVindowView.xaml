@@ -42,12 +42,8 @@
                            SelectedItem="{Binding SelectedMenuItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                            >
             <Grid>
-
-                <Canvas x:Name="ParticleCanvas" Visibility="Collapsed"/>
                 <local:BubblesAnimationView/>
-                <Canvas x:Name="WaveCanvas" Visibility="Collapsed" Height="10"/>
                 <ContentControl Content="{Binding CurrentView}"/>
-                
             </Grid>
             
 

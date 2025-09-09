@@ -7,7 +7,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Helpers/DataTemplate.xaml"/>
-                <ResourceDictionary Source="Resources/Styles/HeaderStyle.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/TextBoxStyle.xaml"/>
                 
                 <ui:ThemeResources RequestedTheme="Dark"/>
                 <ui:XamlControlsResources />
