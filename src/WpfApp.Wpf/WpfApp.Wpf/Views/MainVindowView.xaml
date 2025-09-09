@@ -43,7 +43,8 @@
                            >
             <Grid>
 
-                <Canvas x:Name="ParticleCanvas" Visibility="Visible"/>
+                <Canvas x:Name="ParticleCanvas" Visibility="Collapsed"/>
+                <local:BubblesAnimationView/>
                 <Canvas x:Name="WaveCanvas" Visibility="Collapsed" Height="10"/>
                 <ContentControl Content="{Binding CurrentView}"/>
                 

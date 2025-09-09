@@ -119,7 +119,6 @@ dotnet ef database update
 - [ ] Unable to add empty or repeted habit title
 - [ ] Add icons
 - [ ] Add win habits
-- [ ] Stylize widget
 
 ## Bugs
 
@@ -157,6 +156,7 @@ dotnet ef database update
 - [x] Logic for ProgresHistory -> some charts etc
 - [x] Fix problem with close button in widget - sholud exit whole app
 - [x] Add picture if habbit list is empty
+- [x] Stylize widget
 
 ### Tests
 - [x] Write unit tests for AtomicHabitServiceTests

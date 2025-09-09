@@ -36,8 +36,6 @@ namespace WpfApp.Wpf.ViewModels
         private string _habitDescription = string.Empty;
         private bool _isHabitChecked;
         private bool _isHabitListEmpty;
-
-        public string MyProperty { get; set; } = "#388E3C";
         public ICommand AddHabitCommand { get; set; }
         public ICommand ClearHabitCommand { get; set; }
         public ICommand HabitDelateCommand { get; }
