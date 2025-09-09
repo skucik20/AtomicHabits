@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp.Core.Data;
+using WpfApp.Core.Enums;
 using WpfApp.Core.Interfaces;
 using WpfApp.Core.Models;
 
@@ -27,10 +28,26 @@ namespace WpfApp.Core.Services
             return await _context.AtomicHabits.ToListAsync();
         }
 
-        public async Task AddAsync(AtomicHabitModel atomicHabit)
+        public async Task<eHabitTitleState> AddAsync(AtomicHabitModel atomicHabit)
         {
-            _context.AtomicHabits.Add(atomicHabit);
-            await _context.SaveChangesAsync();
+
+            //TODO Test it, now it returns if it is possible
+            bool exists = await _context.AtomicHabits.AnyAsync(h => h.Title == atomicHabit.Title);
+
+            if (atomicHabit.Title == "")
+            {
+                return eHabitTitleState.empty;
+            }
+            else if(exists == true)
+            {
+                return eHabitTitleState.duplicated;
+            }
+            else
+            {
+                _context.AtomicHabits.Add(atomicHabit);
+                await _context.SaveChangesAsync();
+                return eHabitTitleState.unique;
+            }
         }
         public async Task UpdateAsync(AtomicHabitModel atomicHabit)
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp.Core.Enums;
 using WpfApp.Core.Models;
 
 namespace WpfApp.Core.Interfaces
@@ -10,7 +11,7 @@ namespace WpfApp.Core.Interfaces
     public interface IAtomicHabitService
     {
         Task<List<AtomicHabitModel>> GetAllAsync();
-        Task AddAsync(AtomicHabitModel atomicHabit);
+        Task<eHabitTitleState> AddAsync(AtomicHabitModel atomicHabit);
         Task UpdateAsync(AtomicHabitModel atomicHabit);
         Task DeleteAsync(int id);
         Task ResetValues();

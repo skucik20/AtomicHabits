@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using WpfApp.Core.Enums;
 using WpfApp.Core.Interfaces;
 using WpfApp.Core.Models;
 using WpfApp.Core.Models.Shared;
@@ -238,7 +239,7 @@ namespace WpfApp.Wpf.ViewModels
 
         public async Task AddHabit(object parametr)
         {
-            await _atomicHabitService.AddAsync(new AtomicHabitModel
+            eHabitTitleState habitTitleState = await _atomicHabitService.AddAsync(new AtomicHabitModel
             {
                 Title = HabitTitle,
                 Description = HabitDescription,
@@ -247,8 +248,40 @@ namespace WpfApp.Wpf.ViewModels
 
             });
             _ = LoadData();
-            var toast = new ToastWindow("Success!", "Your operation completed successfully.");
-            toast.Show();
+            
+            
+            switch(habitTitleState)
+            {
+                case eHabitTitleState.duplicated:
+                    var dialog = new ContentDialog
+                    {
+                        Title = "Note",
+                        Content = "You cannot add a habit with the same title.",
+                        CloseButtonText = "Ok"
+                    };
+                    await dialog.ShowAsync();
+
+                    break;
+
+                case eHabitTitleState.empty:
+                    dialog = new ContentDialog
+                    {
+                        Title = "Note",
+                        Content = "You cannot add an empty habit.",
+                        CloseButtonText = "Ok"
+                    };
+                    await dialog.ShowAsync();
+
+                    break;
+                case eHabitTitleState.unique:
+
+                    var toast = new ToastWindow("Success!", "Your operation completed successfully.");
+                    toast.Show();
+                    break;
+            }
+
+
+            
             IsAtomicHabitsListEmpty();
         }
 

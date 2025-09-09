@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Resources;
 using WpfApp.Core.Data;
+using WpfApp.Core.Enums;
 using WpfApp.Core.Interfaces;
 using WpfApp.Core.Models;
 using WpfApp.Core.Services;
@@ -60,14 +61,63 @@ namespace WpfApp.Tests.CoreTests
                 Streak = 2,
             };
 
-            await service.AddAsync(habit);
+            var habitTitleState = await service.AddAsync(habit);
 
             Assert.Equal(1, context.AtomicHabits.Count());
             Assert.Equal("Title 1", context.AtomicHabits.First().Title);
             Assert.Equal("Test description", context.AtomicHabits.First().Description);
             Assert.True(context.AtomicHabits.First().IsHabitDone);
             Assert.Equal(2, context.AtomicHabits.First().Streak);
+            Assert.Equal(eHabitTitleState.unique, habitTitleState);
             
+        }
+
+        [Fact]
+        public async Task AddAsync_AddsEmpltyHabitToDatabase()
+        {
+            var context = GetDbContext();
+            var progressMock = new Mock<IProgressHistoryService>();
+            var service = new AtomicHabitService(context, progressMock.Object);
+
+            var habit = new AtomicHabitModel { 
+                Id = 1, 
+                Title = "",
+                Description = "Test description",
+                IsHabitDone = true,
+                Streak = 2,
+            };
+
+            var habitTitleState =  await service.AddAsync(habit);
+            Assert.Equal(eHabitTitleState.empty, habitTitleState);
+        }
+
+        [Fact]
+        public async Task AddAsync_AddsDuplicatedHabitToDatabase()
+        {
+            var context = GetDbContext();
+            var progressMock = new Mock<IProgressHistoryService>();
+            var service = new AtomicHabitService(context, progressMock.Object);
+
+            var habit = new AtomicHabitModel { 
+                Id = 1, 
+                Title = "Test",
+                Description = "Test description",
+                IsHabitDone = true,
+                Streak = 2,
+            };
+
+            var habit1 = new AtomicHabitModel { 
+                Id = 1, 
+                Title = "Test",
+                Description = "Test description",
+                IsHabitDone = true,
+                Streak = 2,
+            };
+
+            var habitTitleState =  await service.AddAsync(habit);
+            var habitTitleState1 =  await service.AddAsync(habit);
+            Assert.Equal(eHabitTitleState.unique, habitTitleState);
+            Assert.Equal(eHabitTitleState.duplicated, habitTitleState1);
         }
 
         [Fact]
