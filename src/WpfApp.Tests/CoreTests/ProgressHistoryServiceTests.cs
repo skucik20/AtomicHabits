@@ -106,7 +106,7 @@ namespace WpfApp.Tests.CoreTests
             var existingProgress = new ProgressHistoryModel
             {
                 AtomicHabitId = 1,
-                HabitCheckDateTime = DateTime.Now.Date.AddHours(8),
+                HabitCheckDateTime = DateTime.Now.AddDays(-1),
                 IsHabitChecked = false
             };
             context.ProgressHistory.Add(existingProgress);
@@ -127,10 +127,51 @@ namespace WpfApp.Tests.CoreTests
             var result = await service.AddProgressAsync(habit);
 
             // Assert
-            var progress = await context.ProgressHistory.FirstOrDefaultAsync();
+            var list = await context.ProgressHistory.OrderBy(p => p.HabitCheckDateTime).ToListAsync();
+            var progress = list.Last();
             Assert.NotNull(progress);
             Assert.Equal(habit.Id, progress.AtomicHabitId);
             Assert.True(progress.IsHabitChecked); // zostało zaktualizowane
+            Assert.True(progress.HabitCheckDateTime.Date == DateTime.Now.Date);
+        }
+
+        [Fact]
+        public async Task AddProgressAsync_ShouldAddNewEmptyProgress_WhenProgressDontExistsToday()
+        {
+            // Arrange
+            var context = GetDbContext(nameof(AddProgressAsync_ShouldUpdateProgress_WhenProgressExistsToday));
+            var existingProgress = new ProgressHistoryModel
+            {
+                AtomicHabitId = 1,
+                HabitCheckDateTime = DateTime.Now.AddDays(-1),
+                IsHabitChecked = false
+            };
+            context.ProgressHistory.Add(existingProgress);
+            await context.SaveChangesAsync();
+
+            var service = new ProgressHistoryService(context);
+
+            var habit = new AtomicHabitModel
+            {
+                Id = 1,
+                Title = "Title 1",
+                Description = "Test description",
+                IsHabitDone = false,
+                Streak = 2,
+            };
+
+            // Act
+            var result = await service.AddProgressAsync(habit);
+
+            // Assert
+
+
+
+            var list = await context.ProgressHistory.OrderBy(p => p.HabitCheckDateTime).ToListAsync();
+            var progress = list.Last();
+            Assert.NotNull(progress);
+            Assert.Equal(habit.Id, progress.AtomicHabitId);
+            Assert.False(progress.IsHabitChecked);
             Assert.True(progress.HabitCheckDateTime.Date == DateTime.Now.Date);
         }
 

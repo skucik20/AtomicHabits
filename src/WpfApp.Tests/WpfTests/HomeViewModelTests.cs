@@ -16,12 +16,14 @@ namespace WpfApp.Tests.WpfTests
     {
         private readonly Mock<IAtomicHabitService> _habitServiceMock;
         private readonly Mock<IProgressHistoryService> _progressServiceMock;
+        private readonly Mock<ICategoryService> _categoryService;
 
 
         public HomeViewModelTests()
         {
             _habitServiceMock = new Mock<IAtomicHabitService>();
             _progressServiceMock = new Mock<IProgressHistoryService>();
+            _categoryService = new Mock<ICategoryService>();
         }
 
         [Fact]
@@ -46,13 +48,31 @@ namespace WpfApp.Tests.WpfTests
                 }
             };
 
+            var categories = new List<CategoryModel>
+            {
+                new CategoryModel
+                {
+                    Id = 1,
+                    CategoryName = "Category 1",
+                    CategoryColor = "red",
+                },
+
+                new CategoryModel
+                {
+                    Id = 2,
+                    CategoryName = "Category 2",
+                    CategoryColor = "green",
+                },
+            };
+
+            _categoryService.Setup(s => s.GetAllAsync()).ReturnsAsync(categories);
 
             _habitServiceMock.Setup(s => s.GetAllAsync())
             .ReturnsAsync(habits);
 
 
             // Act
-            var vm = new HomeViewModel(_habitServiceMock.Object, _progressServiceMock.Object);
+            var vm = new HomeViewModel(_habitServiceMock.Object, _progressServiceMock.Object, _categoryService.Object);
 
 
             // Wait for async LoadData() to complete
@@ -91,12 +111,30 @@ namespace WpfApp.Tests.WpfTests
                 IsHabitDone = false,
                 Streak = 4,
             };
+            var categories = new List<CategoryModel>
+            {
+                new CategoryModel
+                {
+                    Id = 1,
+                    CategoryName = "Category 1",
+                    CategoryColor = "red",
+                },
+
+                new CategoryModel
+                {
+                    Id = 2,
+                    CategoryName = "Category 2",
+                    CategoryColor = "green",
+                },
+            };
+
+            _categoryService.Setup(s => s.GetAllAsync()).ReturnsAsync(categories);
 
             _habitServiceMock.Setup(s => s.GetAllAsync())
             .ReturnsAsync(new List<AtomicHabitModel> { habit });
 
 
-            var vm = new HomeViewModel(_habitServiceMock.Object, _progressServiceMock.Object);
+            var vm = new HomeViewModel(_habitServiceMock.Object, _progressServiceMock.Object, _categoryService.Object);
             await Task.Delay(50);
 
 
