@@ -4,27 +4,46 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp.Wpf.Views"
+             xmlns:conv="clr-namespace:WpfApp.Wpf.Helpers.Converters"
              xmlns:ext="clr-namespace:WpfApp.Wpf.Helpers.Extensions"
              mc:Ignorable="d" 
+             xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignHeight="450" d:DesignWidth="800"
              >
+    <UserControl.Resources>
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisDefault" />
+    </UserControl.Resources>
     <ScrollViewer>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <StackPanel Margin="50">
-
+                <Expander Header="Edit history">
+                    <StackPanel Background="Purple">
+                        <TextBlock Text="Wich day you want to edit?"/>
+                        <DatePicker SelectedDate="{Binding DateToEdit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                        <CheckBox Content="Was done?" IsChecked="{Binding IsHabitDoneToEdit, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Content="Edit" Command="{Binding EditProgresHistoryCommand}"/>
+                    </StackPanel>
+                    
+                </Expander>
+                
+                
                 <TextBlock Margin="0 10" Text="Select habbit you want to track"/>
-                <ComboBox ItemsSource="{Binding HabitHistorySelectionComboBox}" 
+                <ComboBox x:Name="ComboName" ItemsSource="{Binding HabitHistorySelectionComboBox}" 
                         SelectedItem="{Binding SeledtedHabitHistorySelectionComboBoxoperty, UpdateSourceTrigger=PropertyChanged}" 
                         DisplayMemberPath="Content"/>
 
+
+
+
                 <TextBlock Margin="0 10" Text="History:"/>
                 <ListView ItemsSource="{Binding SeledtedHabitHistorySelectionComboBoxoperty.ProgressCollection, UpdateSourceTrigger=PropertyChanged}" Margin="0 10"  
-                          Width="175" 
-                          Height="400"
+                          Width="175"
                           HorizontalAlignment="Left">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>

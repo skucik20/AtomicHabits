@@ -112,7 +112,10 @@ dotnet ef database update
 - [ ] Unable to click on date button in calendar -> now there is workeround with border
 - [ ] Under left button delate-edit in list
 - [ ] Add tabs witch categories -> if theere is a lot of tasks it will be easier for user to navigate
-
+- [ ] Add possibility to edit category
+- [ ] Accept enter in details
+- [ ] subtask in habbit
+- [ ] Enable enter in details
 
 ## Todo ⏳
 
@@ -125,6 +128,7 @@ dotnet ef database update
 - [x] Scroll does not work on list in Progrss history
 - [ ] Remove highliting of the list
 - [ ] If you change list arreangement it restes after restart
+- [ ] User can eddit title so it will be the same
 
 ## Completed ✅ 
 - [x] Create GitHub repository

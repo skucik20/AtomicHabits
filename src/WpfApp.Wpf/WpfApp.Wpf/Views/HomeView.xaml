@@ -38,7 +38,7 @@
 
                 <Expander Header="Create new habbit" Grid.Row="2" Grid.Column="1" Margin="20" 
                           HorizontalAlignment="Left"
-                          ExpandDirection="Right"
+                          ExpandDirection="Down"
                           Background="{StaticResource SystemControlHighlightAccentBrush}" 
                           BorderBrush="{DynamicResource SystemControlForegroundBaseMediumLowBrush}"
                           BorderThickness="1" 

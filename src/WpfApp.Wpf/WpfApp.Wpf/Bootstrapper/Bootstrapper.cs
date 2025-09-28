@@ -45,7 +45,7 @@ namespace WpfApp.Wpf.Bootstrapper
             // Business serwises
             services.AddScoped<IAtomicHabitService, AtomicHabitService>();
             services.AddSingleton<IDailyResetService, DailyResetService>();
-            services.AddSingleton<IProgressHistoryService, ProgressHistoryService>();
+            services.AddTransient<IProgressHistoryService, ProgressHistoryService>();
             services.AddSingleton<ICategoryService, CategoryService>();
 
             // ViewModels
